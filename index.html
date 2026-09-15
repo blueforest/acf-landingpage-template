@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="We design high-performing websites built for visibility, trust, and conversion—helping you attract qualified traffic and turn more visitors into real opportunities." />
+    <meta name="theme-color" content="#ffffff" />
+    <title>Wesight — Websites built to grow your business</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;800&amp;display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          screens: {
+            md: "768px",
+            lg: "1024px",
+            xl: "1440px",
+          },
+          extend: {
+            colors: {
+              "brand-red": "#f03748",
+              "link-red": "#df1c13",
+              "yellow-accent": "#ffbe2e",
+              "dark-navy": "#13202f",
+              "body-text": "#191919",
+              "warm-stone": "#f5f5f4",
+              surface: "#ffffff",
+              "surface-gray": "#f6f6f6",
+              "surface-alt": "#f8f8f8",
+              "surface-warm": "#f7f1e7",
+              "border-gray": "#ebebeb",
+              danger: "#f03748",
+              success: "#22c55e",
+              warning: "#ffbe2e",
+            },
+            fontFamily: {
+              roboto: ["Roboto", "Arial", "Helvetica", "system-ui", "sans-serif"],
+              body: ["Roboto", "Arial", "Helvetica", "system-ui", "sans-serif"],
+              heading: ["Roboto", "Arial", "Helvetica", "system-ui", "sans-serif"],
+            },
+            fontSize: {
+              "display-stat": ["28px", { lineHeight: "1.8", letterSpacing: "2px" }],
+              "heading-hero": ["41px", { lineHeight: "1.6" }],
+              "heading-hero-tablet": ["34px", { lineHeight: "1.6" }],
+              "heading-hero-mobile": ["30px", { lineHeight: "1.6" }],
+              "heading-1": ["40px", { lineHeight: "1.5" }],
+              "heading-1-tablet": ["36px", { lineHeight: "1.5" }],
+              "heading-1-mobile": ["28px", { lineHeight: "1.5" }],
+              "heading-2": ["32px", { lineHeight: "1.5" }],
+              "heading-2-mobile": ["28px", { lineHeight: "1.5" }],
+              "heading-3": ["26px", { lineHeight: "1.5" }],
+              "heading-3-tablet": ["24px", { lineHeight: "1.5" }],
+              "heading-3-mobile": ["21px", { lineHeight: "1.5" }],
+              "heading-sub": ["18.72px", { lineHeight: "1.5" }],
+              "heading-company": ["17px", { lineHeight: "1.5" }],
+              "heading-cta": ["24px", { lineHeight: "1.5" }],
+              "body-lg": ["20px", { lineHeight: "1.6" }],
+              "body-lg-mobile": ["18px", { lineHeight: "1.6" }],
+              body: ["16px", { lineHeight: "1.6" }],
+              "body-feature": ["16px", { lineHeight: "1.85" }],
+              "body-small": ["14px", { lineHeight: "1.6" }],
+              nav: ["14px", { lineHeight: "1.6" }],
+              "cta-label": ["21px", { lineHeight: "1.3" }],
+              "button-medium": ["16px", { lineHeight: "1.3" }],
+              "button-large": ["20px", { lineHeight: "1" }],
+              footer: ["14px", { lineHeight: "24px" }],
+              caption: ["12px", { lineHeight: "1.5" }],
+              "caption-small": ["10px", { lineHeight: "1.5" }],
+              "display-large": ["48px", { lineHeight: "1.5" }],
+              "button-small": ["14px", { lineHeight: "1.3" }],
+            },
+            lineHeight: {
+              base: "1.6",
+              feature: "1.85",
+              heading: "1.5",
+              display: "1.8",
+              cta: "1.3",
+            },
+            letterSpacing: {
+              display: "2px",
+            },
+            spacing: {
+              "design-xs": "4px",
+              "design-s": "8px",
+              "design-m": "16px",
+              "design-l": "24px",
+              "design-xl": "48px",
+              "design-2xl": "80px",
+              header: "80px",
+              "header-mobile": "76px",
+              "section-mobile": "72px",
+              "menu-shift": "7px",
+            },
+            borderRadius: {
+              badge: "4px",
+              card: "5px",
+              panel: "16px",
+              pill: "26px",
+            },
+            boxShadow: {
+              raised: "0 2px 8px rgba(0, 0, 0, 0.06)",
+              dropdown: "0 4px 16px rgba(0, 0, 0, 0.08)",
+              modal: "0 8px 32px rgba(0, 0, 0, 0.12)",
+            },
+            maxWidth: {
+              content: "1200px",
+              "hero-copy": "1040px",
+              "hero-heading": "860px",
+              lead: "720px",
+              intro: "820px",
+              dropdown: "240px",
+            },
+            width: {
+              "brand-mobile": "142px",
+              "brand-tablet": "154px",
+              brand: "164px",
+              "footer-logo": "172px",
+            },
+            minHeight: {
+              touch: "44px",
+              button: "52px",
+              image: "380px",
+              "image-mobile": "300px",
+              card: "320px",
+            },
+            gridTemplateColumns: {
+              feature: "minmax(0, 5fr) minmax(0, 7fr)",
+              "feature-reverse": "minmax(0, 7fr) minmax(0, 5fr)",
+              footer: "minmax(220px, 1.4fr) repeat(2, minmax(180px, 1fr))",
+            },
+            ringWidth: {
+              3: "3px",
+            },
+            zIndex: {
+              header: "100",
+              skip: "1000",
+            },
+          },
+        },
+      };
+    </script>
+    <style type="text/tailwindcss">
+      @layer base {
+        body {
+          @apply m-0 bg-warm-stone pt-header-mobile font-body text-body text-body-text lg:pt-header;
+          font-feature-settings: normal;
+          letter-spacing: normal;
+          word-break: normal;
+          overflow-wrap: break-word;
+          line-break: strict;
+        }
+
+        body.menu-open { @apply overflow-hidden; }
+        a, button, summary { touch-action: manipulation; }
+        strong { @apply font-bold text-dark-navy; }
+        :focus-visible { @apply outline-none ring-3 ring-link-red ring-offset-4; }
+        summary::-webkit-details-marker { display: none; }
+      }
+
+      @layer components {
+        .section-container { @apply mx-auto w-full max-w-content px-design-m md:px-design-l lg:px-8; }
+        .section-surface { @apply bg-surface; }
+        .section-warm { @apply bg-warm-stone; }
+        .deep-navy { @apply bg-dark-navy text-white; }
+
+        .heading-hero { @apply mx-auto mb-design-l max-w-hero-heading font-heading text-heading-hero-mobile font-bold text-dark-navy md:text-heading-hero-tablet lg:text-heading-hero; }
+        .heading-1 { @apply mb-design-l font-heading text-heading-1-mobile font-bold text-dark-navy md:text-heading-1-tablet lg:text-heading-1; }
+        .heading-2 { @apply mb-design-l font-heading text-heading-2-mobile font-bold text-dark-navy lg:text-heading-2; }
+        .heading-3 { @apply mb-design-m font-heading text-heading-3-mobile font-bold text-dark-navy md:text-heading-3-tablet lg:text-heading-3; }
+        .heading-cta { @apply font-heading text-heading-cta font-bold text-white; }
+        .body-feature { @apply font-body text-body-feature font-normal text-body-text; }
+        .body-lg { @apply font-body text-body-lg-mobile font-normal text-body-text lg:text-body-lg; }
+
+        .button-primary { @apply inline-flex min-h-button items-center justify-center gap-3 whitespace-nowrap rounded-pill border-0 bg-brand-red px-7 py-3 font-heading text-button-medium font-bold text-white no-underline transition-colors duration-200 hover:bg-link-red active:bg-link-red; }
+        .button-secondary { @apply inline-flex min-h-button items-center justify-center gap-3 whitespace-nowrap rounded-pill border border-brand-red bg-surface px-7 py-3 font-heading text-button-medium font-bold text-brand-red no-underline transition-colors duration-200 hover:bg-brand-red hover:text-white active:bg-link-red active:text-white; }
+        .header-cta { @apply inline-flex min-h-touch items-center justify-center rounded-pill bg-brand-red px-design-l py-3 font-heading text-button-medium font-bold text-white no-underline transition-colors duration-200 hover:bg-link-red active:bg-link-red lg:text-cta-label; }
+        .nav-link { @apply inline-flex min-h-button w-full cursor-pointer items-center justify-between border-b border-border-gray font-heading text-button-medium font-bold text-dark-navy no-underline transition-colors duration-200 hover:text-link-red lg:min-h-touch lg:w-auto lg:border-0 lg:text-nav; }
+        .footer-link { @apply inline-flex min-h-touch items-center font-body text-footer font-normal text-white underline-offset-4 transition-colors duration-200 hover:text-white hover:underline; }
+
+        .highlight-badge { @apply inline-flex rounded-badge bg-yellow-accent px-2.5 py-design-xs font-heading text-caption font-bold text-dark-navy; }
+        .industry-card { @apply flex min-h-0 flex-col items-start rounded-card border border-border-gray bg-surface px-design-l pb-8 pt-8 text-body-text md:min-h-card md:px-7 md:pb-10; }
+        .service-icon { @apply h-10 w-10 shrink-0 fill-current text-brand-red; }
+
+        .primary-nav.is-open { @apply block; }
+        .menu-toggle[aria-expanded="true"] .menu-bar:first-child { @apply translate-y-menu-shift rotate-45; }
+        .menu-toggle[aria-expanded="true"] .menu-bar:nth-child(2) { @apply opacity-0; }
+        .menu-toggle[aria-expanded="true"] .menu-bar:last-child { @apply -translate-y-menu-shift -rotate-45; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="fixed inset-x-0 top-0 z-header min-h-header-mobile border-b border-border-gray bg-surface lg:min-h-header">
+      <div class="section-container flex min-h-header-mobile items-center justify-between gap-8 lg:min-h-header">
+        <a class="w-brand-mobile shrink-0 py-design-s md:w-brand-tablet lg:w-brand" href="#top" aria-label="Wesight home">
+          <img class="h-auto w-full" src="./logo.svg" alt="Wesight" width="800" height="190" />
+        </a>
+        <button class="menu-toggle inline-flex min-h-12 min-w-12 cursor-pointer flex-col items-center justify-center gap-1.5 rounded-card border border-border-gray bg-surface p-0 text-dark-navy lg:hidden" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation">
+          <span class="menu-bar block h-0.5 w-5 bg-current transition duration-200" aria-hidden="true"></span>
+          <span class="menu-bar block h-0.5 w-5 bg-current transition duration-200" aria-hidden="true"></span>
+          <span class="menu-bar block h-0.5 w-5 bg-current transition duration-200" aria-hidden="true"></span>
+        </button>
+        <nav class="primary-nav absolute left-0 top-full hidden max-h-[calc(100dvh-76px)] w-full items-stretch overflow-y-auto border-b border-border-gray bg-surface p-design-l lg:static lg:flex lg:max-h-none lg:w-auto lg:items-center lg:overflow-visible lg:border-0 lg:bg-transparent lg:p-0" id="primary-navigation" aria-label="Primary navigation">
+          <ul class="flex list-none flex-col items-stretch gap-0 p-0 lg:flex-row lg:items-center lg:gap-4 xl:gap-7">
+            <li>
+              <details class="group relative">
+                <summary class="nav-link gap-design-s group-open:text-link-red">
+                  Services
+                  <svg class="h-3 w-3 transition-transform duration-200 group-open:rotate-180" viewBox="0 0 12 12" aria-hidden="true">
+                    <path d="M2.25 4.5 6 8.25 9.75 4.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" />
+                  </svg>
+                </summary>
+                <div class="hidden w-full border-b border-border-gray pb-design-s pl-5 group-open:block lg:absolute lg:-left-5 lg:top-[calc(100%+10px)] lg:z-10 lg:max-w-dropdown lg:border lg:bg-surface lg:py-2.5 lg:pl-0 lg:shadow-dropdown">
+                  <a class="flex min-h-12 items-center py-design-s font-heading text-nav font-bold text-dark-navy no-underline hover:bg-surface-gray hover:text-link-red lg:block lg:min-h-0 lg:px-5 lg:py-2.5" href="#web-design">Web Design</a>
+                  <a class="flex min-h-12 items-center py-design-s font-heading text-nav font-bold text-dark-navy no-underline hover:bg-surface-gray hover:text-link-red lg:block lg:min-h-0 lg:px-5 lg:py-2.5" href="#landing-pages">Landing Page Service</a>
+                </div>
+              </details>
+            </li>
+            <li><a class="nav-link" href="#about">About</a></li>
+            <li><a class="nav-link" href="#color-scheme">Color Scheme</a></li>
+            <li><a class="nav-link" href="#website-template">Website Template</a></li>
+            <li><a class="nav-link" href="#pricing">Pricing</a></li>
+            <li><a class="header-cta mt-5 w-full lg:mt-0 lg:w-auto" href="#contact">Contact Us</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section class="section-surface pb-16 pt-design-m md:pb-design-2xl md:pt-8" id="top">
+        <div class="section-container flex min-h-0 flex-col items-center justify-center py-16 text-center md:py-design-2xl lg:min-h-[min(720px,calc(100dvh-144px))] lg:py-28">
+          <div class="w-full max-w-hero-copy">
+            <h1 class="heading-hero">Websites built to turn search traffic into leads and sales.</h1>
+            <p class="body-lg mx-auto mb-8 max-w-lead">We design high-performing websites built for visibility, trust, and conversion—helping you attract qualified traffic and turn more visitors into real opportunities.</p>
+            <div class="flex w-full flex-wrap justify-center gap-3 md:w-auto">
+              <a class="button-primary w-full md:w-auto" href="#solutions">Services <span class="text-button-large" aria-hidden="true">→</span></a>
+              <a class="button-secondary w-full md:w-auto" href="#contact">Contact Us</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-warm py-section-mobile md:py-design-2xl lg:py-28" id="about">
+        <div class="section-container grid items-center gap-10 md:gap-design-xl lg:grid-cols-feature lg:gap-20">
+          <div class="grid min-h-image-mobile place-items-center rounded-panel border border-border-gray bg-surface-gray p-design-l text-center text-body-text md:min-h-image" role="img" aria-label="Placeholder for an image illustrating lost website traffic">
+            <span class="rounded-card border border-border-gray bg-surface px-design-m py-design-s text-nav leading-normal">Content image placeholder</span>
+          </div>
+          <div class="max-w-lead">
+            <h2 class="heading-2">Driving traffic to a weak website is like pouring water into a leaky bucket.</h2>
+            <p class="body-feature mb-5">You can invest in SEO, Google Ads, and content to bring more visitors to your website—but if the site is slow, unclear, or poorly designed for conversion, much of that traffic goes to waste.</p>
+            <p class="body-feature mb-5">A good website doesn’t just attract visitors. It builds trust, communicates your value clearly, and turns the right traffic into qualified leads and sales.</p>
+            <p class="body-feature">Before spending more to get traffic, make sure your website is built to convert it.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-surface py-section-mobile md:py-design-2xl lg:py-28" id="website-template">
+        <div class="section-container grid items-center gap-10 md:gap-design-xl lg:grid-cols-feature-reverse lg:gap-20">
+          <div class="grid min-h-image-mobile place-items-center rounded-panel border border-border-gray bg-surface-gray p-design-l text-center text-body-text md:min-h-image lg:order-2" role="img" aria-label="Placeholder for a business growth website image">
+            <span class="rounded-card border border-border-gray bg-surface px-design-m py-design-s text-nav leading-normal">Website image placeholder</span>
+          </div>
+          <div class="max-w-lead">
+            <h2 class="heading-2">Websites built to grow your business</h2>
+            <p class="body-lg mb-5">A website should do more than look good. It should help the right people find you, understand what you offer, trust your business, and take action.</p>
+            <p class="body-feature mb-5">That’s why we build websites around <strong>SEO, user experience, and conversion</strong> from the start. Every page has a purpose—whether it’s generating inquiries, attracting qualified traffic, or turning visitors into customers.</p>
+            <p class="body-feature">Great design comes next. Because when strategy, performance, and design work together, <strong>your website becomes a real engine for business growth.</strong></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-warm py-section-mobile md:py-design-2xl lg:py-28" id="solutions">
+        <div class="section-container">
+          <div class="mx-auto mb-10 max-w-intro text-center md:mb-14">
+        
+            <h2 class="heading-1">Solutions designed to drive real growth</h2>
+            <p class="body-lg">We help businesses build high-converting websites, grow qualified traffic through SEO, and improve performance over time. Whether you’re starting from scratch or scaling an established brand, every solution is focused on one thing: <strong>turning more traffic into more leads, customers, and revenue.</strong></p>
+          </div>
+          <div class="grid grid-cols-1 gap-design-m md:grid-cols-2 md:gap-design-l lg:grid-cols-3">
+            <article class="industry-card" id="web-design">
+              <div class="mb-8 flex w-full items-center justify-between gap-design-m">
+                <svg class="service-icon" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg" data-acsb-hidden="true" aria-hidden="true" role="presentation">
+                  <path d="M278.9 511.5l-61-17.7c-6.4-1.8-10-8.5-8.2-14.9L346.2 8.7c1.8-6.4 8.5-10 14.9-8.2l61 17.7c6.4 1.8 10 8.5 8.2 14.9L293.8 503.3c-1.9 6.4-8.5 10.1-14.9 8.2zm-114-112.2l43.5-46.4c4.6-4.9 4.3-12.7-.8-17.2L117 256l90.6-79.7c5.1-4.5 5.5-12.3.8-17.2l-43.5-46.4c-4.5-4.8-12.1-5.1-17-.5L3.8 247.2c-5.1 4.7-5.1 12.8 0 17.5l144.1 135.1c4.9 4.6 12.5 4.4 17-.5zm327.2.6l144.1-135.1c5.1-4.7 5.1-12.8 0-17.5L492.1 112.1c-4.8-4.5-12.4-4.3-17 .5L431.6 159c-4.6 4.9-4.3 12.7.8 17.2L523 256l-90.6 79.7c-5.1 4.5-5.5 12.3-.8 17.2l43.5 46.4c4.5 4.9 12.1 5.1 17 .6z"></path>
+                </svg>
+               
+              </div>
+              <h3 class="heading-3">Web Design &amp; Development</h3>
+              <p class="body-feature">We design and build high-performing websites that look great, communicate your value clearly, and turn more visitors into qualified leads and customers.</p>
+            </article>
+            <article class="industry-card" id="landing-pages">
+              <div class="mb-8 flex w-full items-center justify-between gap-design-m">
+                <svg class="service-icon" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" data-acsb-hidden="true" aria-hidden="true" role="presentation">
+                  <path d="M496 384H64V80c0-8.84-7.16-16-16-16H16C7.16 64 0 71.16 0 80v336c0 17.67 14.33 32 32 32h464c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16zM464 96H345.94c-21.38 0-32.09 25.85-16.97 40.97l32.4 32.4L288 242.75l-73.37-73.37c-12.5-12.5-32.76-12.5-45.25 0l-68.69 68.69c-6.25 6.25-6.25 16.38 0 22.63l22.62 22.62c6.25 6.25 16.38 6.25 22.63 0L192 237.25l73.37 73.37c12.5 12.5 32.76 12.5 45.25 0l96-96 32.4 32.4c15.12 15.12 40.97 4.41 40.97-16.97V112c.01-8.84-7.15-16-15.99-16z"></path>
+                </svg>
+             
+              </div>
+              <h3 class="heading-3">Conversion Rate Optimization</h3>
+              <p class="body-feature">Already getting consistent traffic? We help you get more value from it through conversion research, A/B testing, landing page optimization, and ongoing CRO.</p>
+            </article>
+            <article class="industry-card">
+              <div class="mb-8 flex w-full items-center justify-between gap-design-m">
+                <svg class="service-icon" viewBox="0 0 576 512" xmlns="http://www.w3.org/2000/svg" data-acsb-hidden="true" aria-hidden="true" role="presentation">
+                  <path d="M464 0H112c-4 0-7.8 2-10 5.4L2 152.6c-2.9 4.4-2.6 10.2.7 14.2l276 340.8c4.8 5.9 13.8 5.9 18.6 0l276-340.8c3.3-4.1 3.6-9.8.7-14.2L474.1 5.4C471.8 2 468.1 0 464 0zm-19.3 48l63.3 96h-68.4l-51.7-96h56.8zm-202.1 0h90.7l51.7 96H191l51.6-96zm-111.3 0h56.8l-51.7 96H68l63.3-96zm-43 144h51.4L208 352 88.3 192zm102.9 0h193.6L288 435.3 191.2 192zM368 352l68.2-160h51.4L368 352z"></path>
+                </svg>
+              
+              </div>
+              <h3 class="heading-3">UX/UI Design</h3>
+              <p class="body-feature">We create digital experiences that balance user needs with business goals—from research and user flows to interface design, prototyping, and motion.</p>
+            </article>
+            <article class="industry-card">
+              <div class="mb-8 flex w-full items-center justify-between gap-design-m">
+                <svg class="service-icon" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg" data-acsb-hidden="true" aria-hidden="true" role="presentation">
+                  <path d="M624 416H381.54c-.74 19.81-14.71 32-32.74 32H288c-18.69 0-33.02-17.47-32.77-32H16c-8.8 0-16 7.2-16 16v16c0 35.2 28.8 64 64 64h512c35.2 0 64-28.8 64-64v-16c0-8.8-7.2-16-16-16zM576 48c0-26.4-21.6-48-48-48H112C85.6 0 64 21.6 64 48v336h512V48zm-64 272H128V64h384v256z"></path>
+                </svg>
+            
+              </div>
+              <h3 class="heading-3">Dashboard &amp; App Design</h3>
+              <p class="body-feature">We design intuitive dashboards and mobile apps that make complex information easier to understand, use, and act on.</p>
+            </article>
+            <article class="industry-card" id="color-scheme">
+              <div class="mb-8 flex w-full items-center justify-between gap-design-m">
+                <svg class="service-icon" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" data-acsb-hidden="true" aria-hidden="true" role="presentation">
+                  <path d="M396.8 352h22.4c6.4 0 12.8-6.4 12.8-12.8V108.8c0-6.4-6.4-12.8-12.8-12.8h-22.4c-6.4 0-12.8 6.4-12.8 12.8v230.4c0 6.4 6.4 12.8 12.8 12.8zm-192 0h22.4c6.4 0 12.8-6.4 12.8-12.8V140.8c0-6.4-6.4-12.8-12.8-12.8h-22.4c-6.4 0-12.8 6.4-12.8 12.8v198.4c0 6.4 6.4 12.8 12.8 12.8zm96 0h22.4c6.4 0 12.8-6.4 12.8-12.8V204.8c0-6.4-6.4-12.8-12.8-12.8h-22.4c-6.4 0-12.8 6.4-12.8 12.8v134.4c0 6.4 6.4 12.8 12.8 12.8zM496 400H48V80c0-8.84-7.16-16-16-16H16C7.16 64 0 71.16 0 80v336c0 17.67 14.33 32 32 32h464c8.84 0 16-7.16 16-16v-16c0-8.84-7.16-16-16-16zm-387.2-48h22.4c6.4 0 12.8-6.4 12.8-12.8v-70.4c0-6.4-6.4-12.8-12.8-12.8h-22.4c-6.4 0-12.8 6.4-12.8 12.8v70.4c0 6.4 6.4 12.8 12.8 12.8z"></path>
+                </svg>
+              
+              </div>
+              <h3 class="heading-3">One-Time Website Audit</h3>
+              <p class="body-feature">Not sure why your website isn’t converting? We review your site, user journey, messaging, and key conversion points, then provide clear, actionable recommendations for improvement.</p>
+            </article>
+            <article class="industry-card" id="pricing">
+              <div class="mb-8 flex w-full items-center justify-between gap-design-m">
+                <svg class="service-icon" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg" data-acsb-hidden="true" aria-hidden="true" role="presentation">
+                  <path d="M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z"></path>
+                </svg>
+             
+              </div>
+              <h3 class="heading-3">SEO</h3>
+              <p class="body-feature">More traffic only matters when it brings the right people. We build SEO strategies that improve visibility, attract qualified search traffic, and support long-term lead generation and growth.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="deep-navy" id="contact">
+        <div class="section-container py-16 text-center md:py-design-2xl">
+          <h2 class="heading-cta">Contact Us</h2>
+        </div>
+      </section>
+    </main>
+
+    <footer class="deep-navy border-t border-white/20">
+      <div class="section-container grid grid-cols-1 gap-8 py-design-xl md:grid-cols-footer md:gap-design-xl md:py-16">
+        <div>
+          <a href="#top" aria-label="Wesight home">
+            <img class="mb-5 w-footer-logo rounded-card bg-surface p-3.5" src="./logo.svg" alt="Wesight" width="800" height="190" />
+          </a>
+        </div>
+        <div>
+          <p class="mb-design-m font-heading text-nav font-bold text-white">Services</p>
+          <ul class="list-none space-y-design-s p-0">
+            <li><a class="footer-link" href="#web-design">Web Design</a></li>
+            <li><a class="footer-link" href="#landing-pages">Landing Page Service</a></li>
+            <li><a class="footer-link" href="#solutions">UX/UI Design</a></li>
+            <li><a class="footer-link" href="#solutions">SEO</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="mb-design-m font-heading text-nav font-bold text-white">Company</p>
+          <ul class="list-none space-y-design-s p-0">
+            <li><a class="footer-link" href="#about">About</a></li>
+            <li><a class="footer-link" href="#color-scheme">Color Scheme</a></li>
+            <li><a class="footer-link" href="#website-template">Website Template</a></li>
+            <li><a class="footer-link" href="#pricing">Pricing</a></li>
+            <li><a class="footer-link" href="#contact">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const menuToggle = document.querySelector(".menu-toggle");
+      const primaryNav = document.querySelector(".primary-nav");
+
+      function closeMenu() {
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Open navigation");
+        primaryNav.classList.remove("is-open");
+        document.body.classList.remove("menu-open");
+      }
+
+      menuToggle.addEventListener("click", () => {
+        const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+        menuToggle.setAttribute("aria-expanded", String(!isOpen));
+        menuToggle.setAttribute("aria-label", isOpen ? "Open navigation" : "Close navigation");
+        primaryNav.classList.toggle("is-open", !isOpen);
+        document.body.classList.toggle("menu-open", !isOpen);
+      });
+
+      primaryNav.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", closeMenu);
+      });
+
+      window.addEventListener("resize", () => {
+        if (window.innerWidth >= 1024) closeMenu();
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Explore selected Wesight web design work across corporate websites, landing pages, real estate experiences, portfolios, and conversion-focused contact journeys." />
+    <meta name="theme-color" content="#ffffff" />
+    <title>Web Design Portfolio | Wesight</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;800&amp;display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          screens: {
+            sm: "640px",
+            md: "768px",
+            lg: "1024px",
+            xl: "1440px",
+          },
+          extend: {
+            colors: {
+              "brand-red": "#f03748",
+              "link-red": "#df1c13",
+              "yellow-accent": "#ffbe2e",
+              "dark-navy": "#13202f",
+              "body-text": "#191919",
+              "warm-stone": "#f5f5f4",
+              surface: "#ffffff",
+              "surface-gray": "#f6f6f6",
+              "surface-warm": "#f7f1e7",
+              "border-gray": "#ebebeb",
+              success: "#22c55e",
+            },
+            fontFamily: {
+              body: ["Roboto", "Arial", "Helvetica", "system-ui", "sans-serif"],
+              heading: ["Roboto", "Arial", "Helvetica", "system-ui", "sans-serif"],
+            },
+            fontSize: {
+              "heading-hero": ["41px", { lineHeight: "1.6" }],
+              "heading-hero-tablet": ["34px", { lineHeight: "1.6" }],
+              "heading-hero-mobile": ["30px", { lineHeight: "1.6" }],
+              "heading-3": ["26px", { lineHeight: "1.5" }],
+              "heading-3-tablet": ["24px", { lineHeight: "1.5" }],
+              "heading-3-mobile": ["21px", { lineHeight: "1.5" }],
+              "heading-cta": ["24px", { lineHeight: "1.5" }],
+              "body-lg": ["20px", { lineHeight: "1.6" }],
+              "body-lg-mobile": ["18px", { lineHeight: "1.6" }],
+              body: ["16px", { lineHeight: "1.6" }],
+              "body-small": ["14px", { lineHeight: "1.6" }],
+              nav: ["14px", { lineHeight: "1.6" }],
+              "cta-label": ["21px", { lineHeight: "1.3" }],
+              "button-medium": ["16px", { lineHeight: "1.3" }],
+              footer: ["14px", { lineHeight: "24px" }],
+              caption: ["12px", { lineHeight: "1.5" }],
+            },
+            spacing: {
+              "design-xs": "4px",
+              "design-s": "8px",
+              "design-m": "16px",
+              "design-l": "24px",
+              "design-xl": "48px",
+              "design-2xl": "80px",
+              header: "80px",
+              "header-mobile": "76px",
+              "section-mobile": "72px",
+              "menu-shift": "7px",
+            },
+            borderRadius: {
+              badge: "4px",
+              card: "5px",
+              panel: "16px",
+              pill: "26px",
+            },
+            boxShadow: {
+              dropdown: "0 4px 16px rgba(0, 0, 0, 0.08)",
+            },
+            maxWidth: {
+              content: "1200px",
+              lead: "720px",
+              dropdown: "240px",
+            },
+            width: {
+              "brand-mobile": "142px",
+              "brand-tablet": "154px",
+              brand: "164px",
+              "footer-logo": "172px",
+            },
+            height: {
+              "portfolio-card": "580px",
+            },
+            minHeight: {
+              touch: "44px",
+              button: "52px",
+            },
+            gridTemplateColumns: {
+              footer: "minmax(220px, 1.4fr) repeat(2, minmax(180px, 1fr))",
+            },
+            ringWidth: {
+              3: "3px",
+            },
+            zIndex: {
+              header: "100",
+              skip: "1000",
+            },
+          },
+        },
+      };
+    </script>
+    <style type="text/tailwindcss">
+      @layer base {
+        html { scroll-behavior: smooth; }
+
+        body {
+          @apply m-0 bg-surface pt-header-mobile font-body text-body text-body-text lg:pt-header;
+          font-feature-settings: normal;
+          letter-spacing: normal;
+          overflow-wrap: break-word;
+        }
+
+        body.menu-open { @apply overflow-hidden; }
+        a, button, summary { touch-action: manipulation; }
+        :focus-visible { @apply outline-none ring-3 ring-link-red ring-offset-4; }
+        summary::-webkit-details-marker { display: none; }
+      }
+
+      @layer components {
+        .section-container { @apply mx-auto w-full max-w-content px-design-m md:px-design-l lg:px-8; }
+        .deep-navy { @apply bg-dark-navy text-white; }
+
+        .heading-display { @apply font-heading text-heading-hero-mobile font-bold text-dark-navy md:text-heading-hero-tablet lg:text-heading-hero; }
+        .heading-card { @apply font-heading text-heading-3-mobile font-bold text-dark-navy md:text-heading-3-tablet lg:text-heading-3; }
+        .heading-cta { @apply font-heading text-heading-cta font-bold text-white; }
+        .body-lg { @apply font-body text-body-lg-mobile font-normal text-body-text lg:text-body-lg; }
+
+        .button-primary { @apply inline-flex min-h-button items-center justify-center gap-3 whitespace-nowrap rounded-pill border-0 bg-brand-red px-7 py-3 font-heading text-button-medium font-bold text-white no-underline transition-colors duration-200 hover:bg-link-red active:bg-link-red; }
+        .header-cta { @apply inline-flex min-h-touch items-center justify-center rounded-pill bg-brand-red px-design-l py-3 font-heading text-button-medium font-bold text-white no-underline transition-colors duration-200 hover:bg-link-red active:bg-link-red lg:text-cta-label; }
+        .nav-link { @apply inline-flex min-h-button w-full cursor-pointer items-center justify-between border-b border-border-gray font-heading text-button-medium font-bold text-dark-navy no-underline transition-colors duration-200 hover:text-link-red lg:min-h-touch lg:w-auto lg:border-0 lg:text-nav; }
+        .footer-link { @apply inline-flex min-h-touch items-center font-body text-footer font-normal text-white underline-offset-4 transition-colors duration-200 hover:text-white hover:underline; }
+
+        .portfolio-badge { @apply inline-flex items-center gap-2 rounded-badge bg-yellow-accent px-4 py-2 font-heading text-body-small font-bold text-dark-navy; }
+        .hero-tag { @apply inline-flex min-h-touch items-center gap-2 px-2 py-2 font-heading text-body font-bold text-dark-navy; }
+        .hero-check { @apply h-5 w-5 shrink-0 text-success; }
+        .work-card { @apply flex flex-col overflow-hidden rounded-panel border border-border-gray bg-surface transition-colors duration-200 hover:border-brand-red; }
+        .case-link { @apply mt-auto inline-flex min-h-touch items-center gap-2 pt-5 font-heading text-body-small font-bold text-link-red underline-offset-4 hover:underline; }
+
+        .primary-nav.is-open { @apply block; }
+        .menu-toggle[aria-expanded="true"] .menu-bar:first-child { @apply translate-y-menu-shift rotate-45; }
+        .menu-toggle[aria-expanded="true"] .menu-bar:nth-child(2) { @apply opacity-0; }
+        .menu-toggle[aria-expanded="true"] .menu-bar:last-child { @apply -translate-y-menu-shift -rotate-45; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
+      }
+    </style>
+  </head>
+  <body>
+
+
+    <header class="fixed inset-x-0 top-0 z-header min-h-header-mobile border-b border-border-gray bg-surface lg:min-h-header">
+      <div class="section-container flex min-h-header-mobile items-center justify-between gap-8 lg:min-h-header">
+        <a class="w-brand-mobile shrink-0 py-design-s md:w-brand-tablet lg:w-brand" href="./index.html#top" aria-label="Wesight home">
+          <img class="h-auto w-full" src="./logo.svg" alt="Wesight" width="800" height="190" />
+        </a>
+        <button class="menu-toggle inline-flex min-h-12 min-w-12 cursor-pointer flex-col items-center justify-center gap-1.5 rounded-card border border-border-gray bg-surface p-0 text-dark-navy lg:hidden" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation">
+          <span class="menu-bar block h-0.5 w-5 bg-current transition duration-200" aria-hidden="true"></span>
+          <span class="menu-bar block h-0.5 w-5 bg-current transition duration-200" aria-hidden="true"></span>
+          <span class="menu-bar block h-0.5 w-5 bg-current transition duration-200" aria-hidden="true"></span>
+        </button>
+        <nav class="primary-nav absolute left-0 top-full hidden max-h-[calc(100dvh-76px)] w-full items-stretch overflow-y-auto border-b border-border-gray bg-surface p-design-l lg:static lg:flex lg:max-h-none lg:w-auto lg:items-center lg:overflow-visible lg:border-0 lg:bg-transparent lg:p-0" id="primary-navigation" aria-label="Primary navigation">
+          <ul class="flex list-none flex-col items-stretch gap-0 p-0 lg:flex-row lg:items-center lg:gap-4 xl:gap-7">
+            <li>
+              <details class="group relative">
+                <summary class="nav-link gap-design-s group-open:text-link-red">
+                  Services
+                  <svg class="h-3 w-3 transition-transform duration-200 group-open:rotate-180" viewBox="0 0 12 12" aria-hidden="true">
+                    <path d="M2.25 4.5 6 8.25 9.75 4.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" />
+                  </svg>
+                </summary>
+                <div class="hidden w-full border-b border-border-gray pb-design-s pl-5 group-open:block lg:absolute lg:-left-5 lg:top-[calc(100%+10px)] lg:z-10 lg:max-w-dropdown lg:border lg:bg-surface lg:py-2.5 lg:pl-0 lg:shadow-dropdown">
+                  <a class="flex min-h-12 items-center py-design-s font-heading text-nav font-bold text-link-red no-underline hover:bg-surface-gray lg:block lg:min-h-0 lg:px-5 lg:py-2.5" href="#portfolio" aria-current="page">Web Design</a>
+                  <a class="flex min-h-12 items-center py-design-s font-heading text-nav font-bold text-dark-navy no-underline hover:bg-surface-gray hover:text-link-red lg:block lg:min-h-0 lg:px-5 lg:py-2.5" href="./index.html#landing-pages">Landing Page Service</a>
+                </div>
+              </details>
+            </li>
+            <li><a class="nav-link" href="./index.html#about">About</a></li>
+            <li><a class="nav-link" href="./index.html#color-scheme">Color Scheme</a></li>
+            <li><a class="nav-link" href="./index.html#website-template">Website Template</a></li>
+            <li><a class="nav-link" href="./index.html#pricing">Pricing</a></li>
+            <li><a class="header-cta mt-5 w-full lg:mt-0 lg:w-auto" href="./index.html#contact">Contact Us</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section class="bg-surface" id="top" aria-labelledby="hero-heading">
+        <div class="section-container flex flex-col items-center py-16 text-center md:py-design-2xl lg:py-24">
+          <h1 class="heading-display mb-6 max-w-[900px]" id="hero-heading">High-performing, data-driven websites built to convert</h1>
+          <div class="max-w-[820px] space-y-4">
+            <p class="body-lg">We’ve worked with businesses across a wide range of industries, including PCB manufacturing, steel, apparel, pet products, food, and more.</p>
+            <p class="body-lg">That experience has helped us focus on what matters most: building fast, user-friendly websites that attract the right audience, communicate value clearly, and turn more visitors into leads and customers.</p>
+          </div>
+          <div class="mt-8 flex flex-wrap justify-center gap-3" aria-label="Website design benefits">
+            <span class="hero-tag">
+              <svg class="hero-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                <path d="m5 12 4 4L19 6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" />
+              </svg>
+              Designed to Convert
+            </span>
+            <span class="hero-tag">
+              <svg class="hero-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                <path d="m5 12 4 4L19 6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" />
+              </svg>
+              Built to Drive Revenue
+            </span>
+            <span class="hero-tag">
+              <svg class="hero-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                <path d="m5 12 4 4L19 6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" />
+              </svg>
+              Backed by Experts
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-warm-stone py-section-mobile md:py-design-2xl lg:py-24" id="portfolio" aria-labelledby="portfolio-heading">
+        <div class="section-container">
+          <div class="mb-12 max-w-lead lg:mb-14">
+          
+            <h2 class="heading-display mb-4" id="portfolio-heading">Websites designed to turn attention into action.</h2>
+            <p class="body-lg">Selected website work shaped around clear messaging, confident visual systems, and conversion-focused user journeys.</p>
+          </div>
+
+          <div class="grid grid-cols-12 gap-6" id="portfolio-grid">
+            <article class="work-card group col-span-12 lg:col-span-8" data-portfolio-item>
+              <div class="w-full lg:grid lg:h-portfolio-card lg:grid-cols-5">
+                <div class="h-64 overflow-hidden border-b border-border-gray sm:h-80 lg:col-span-3 lg:h-full lg:border-b-0 lg:border-r">
+                  <img class="h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.02]" src="./zuop/Homepage.webp" alt="Bricknet construction corporate website design" width="1473" height="10000" fetchpriority="high" />
+                </div>
+                <div class="flex flex-col justify-between p-6 sm:p-8 lg:col-span-2">
+                  <div>
+                    <h2 class="heading-card mb-3">Bricknet Construction</h2>
+                    <p>A structured, trust-led website that turns a broad service offering into a clear path from discovery to enquiry.</p>
+                  </div>
+                  <a class="case-link" href="./index.html#contact">Discuss a similar project
+                    <svg class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0-7 7m7-7H3" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <article class="work-card group col-span-12 md:col-span-6 lg:col-span-4" data-portfolio-item>
+              <div class="h-64 overflow-hidden border-b border-border-gray sm:h-80">
+                <img class="h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.02]" src="./zuop/Dekstop.webp" alt="Business advisory growth website design" width="2880" height="9158" loading="lazy" />
+              </div>
+              <div class="flex flex-1 flex-col p-6 sm:p-8">
+                <h2 class="heading-card mb-3">Business Advisory</h2>
+                <p>A bold service website balancing credibility, approachable visuals, and direct conversion paths.</p>
+                <a class="case-link" href="./index.html#contact">Discuss a similar project
+                  <svg class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0-7 7m7-7H3" /></svg>
+                </a>
+              </div>
+            </article>
+
+            <article class="work-card group col-span-12 md:col-span-6 lg:col-span-4" data-portfolio-item>
+              <div class="h-64 overflow-hidden border-b border-border-gray sm:h-80">
+                <img class="h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.02]" src="./zuop/house1-langding.webp" alt="Urbanet real estate website design" width="1905" height="10000" loading="lazy" />
+              </div>
+              <div class="flex flex-1 flex-col p-6 sm:p-8">
+                <h2 class="heading-card mb-3">Property Discovery</h2>
+                <p>A responsive listing experience that makes high-value property discovery feel clear and reassuring.</p>
+                <a class="case-link" href="./index.html#contact">Discuss a similar project
+                  <svg class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0-7 7m7-7H3" /></svg>
+                </a>
+              </div>
+            </article>
+
+            <article class="work-card group col-span-12 lg:col-span-8" data-portfolio-item>
+              <div class="w-full lg:grid lg:h-portfolio-card lg:grid-cols-5">
+                <div class="h-64 overflow-hidden border-b border-border-gray sm:h-80 lg:order-2 lg:col-span-3 lg:h-full lg:border-b-0 lg:border-l">
+                  <img class="h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.02]" src="./zuop/landing page design (1).webp" alt="Conversion-focused SaaS landing page design" width="1823" height="10000" loading="lazy" />
+                </div>
+                <div class="flex flex-col justify-between p-6 sm:p-8 lg:order-1 lg:col-span-2">
+                  <div>
+                    <h2 class="heading-card mb-3">SaaS Landing Page</h2>
+                    <p>A focused product narrative that connects benefits, proof, and calls to action in one continuous journey.</p>
+                  </div>
+                  <a class="case-link" href="./index.html#contact">Discuss a similar project
+                    <svg class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0-7 7m7-7H3" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <article class="work-card group col-span-12 md:col-span-6" data-portfolio-item>
+              <div class="h-64 overflow-hidden border-b border-border-gray sm:h-80">
+                <img class="h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.02]" src="./zuop/Project Page.webp" alt="Bricknet project portfolio page design" width="2145" height="10000" loading="lazy" />
+              </div>
+              <div class="flex flex-1 flex-col p-6 sm:p-8">
+                <h2 class="heading-card mb-3">Project Showcase</h2>
+                <p>A visual portfolio system designed to help prospective clients scan capabilities and understand project quality quickly.</p>
+                <a class="case-link" href="./index.html#contact">Discuss a similar project
+                  <svg class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0-7 7m7-7H3" /></svg>
+                </a>
+              </div>
+            </article>
+
+            <article class="work-card group col-span-12 md:col-span-6" data-portfolio-item>
+              <div class="h-64 overflow-hidden border-b border-border-gray sm:h-80">
+                <img class="h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.02]" src="./zuop/Contact Us (3).webp" alt="Urbanet contact experience website design" width="2880" height="8450" loading="lazy" />
+              </div>
+              <div class="flex flex-1 flex-col p-6 sm:p-8">
+                <h2 class="heading-card mb-3">Contact Experience</h2>
+                <p>A clear, low-friction contact journey that supports serious enquiries without overwhelming the visitor.</p>
+                <a class="case-link" href="./index.html#contact">Discuss a similar project
+                  <svg class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0-7 7m7-7H3" /></svg>
+                </a>
+              </div>
+            </article>
+
+            <article class="work-card portfolio-extra group hidden col-span-12 lg:col-span-8" data-portfolio-item hidden>
+              <div class="w-full lg:grid lg:h-portfolio-card lg:grid-cols-5">
+                <div class="h-64 overflow-hidden border-b border-border-gray sm:h-80 lg:col-span-3 lg:h-full lg:border-b-0 lg:border-r">
+                  <img class="h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.02]" src="./zuop/Desktop Landing Page.webp" alt="Orris smart home product website design" width="1472" height="10000" loading="lazy" />
+                </div>
+                <div class="flex flex-col justify-between p-6 sm:p-8 lg:col-span-2">
+                  <div>
+                    <h2 class="heading-card mb-3">Smart Home Product</h2>
+                    <p>A restrained product experience that turns connected-home features into a clear, premium story.</p>
+                  </div>
+                  <a class="case-link" href="./index.html#contact">Discuss a similar project
+                    <svg class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0-7 7m7-7H3" /></svg>
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <article class="work-card portfolio-extra group hidden col-span-12 md:col-span-6 lg:col-span-4" data-portfolio-item hidden>
+              <div class="h-64 overflow-hidden border-b border-border-gray sm:h-80">
+                <img class="h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.02]" src="./zuop/Desktop - 1 (1).webp" alt="DNV security solutions corporate website design" width="2220" height="10000" loading="lazy" />
+              </div>
+              <div class="flex flex-1 flex-col p-6 sm:p-8">
+                <h2 class="heading-card mb-3">Security Solutions</h2>
+                <p>A professional B2B website that organizes technical services around trust, industries, and clear enquiry routes.</p>
+                <a class="case-link" href="./index.html#contact">Discuss a similar project
+                  <svg class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0-7 7m7-7H3" /></svg>
+                </a>
+              </div>
+            </article>
+
+            <article class="work-card portfolio-extra group hidden col-span-12 md:col-span-6 lg:col-span-4" data-portfolio-item hidden>
+              <div class="h-64 overflow-hidden border-b border-border-gray sm:h-80">
+                <img class="h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.02]" src="./zuop/Group 32.webp" alt="Furniture e-commerce website design" width="2784" height="10000" loading="lazy" />
+              </div>
+              <div class="flex flex-1 flex-col p-6 sm:p-8">
+                <h2 class="heading-card mb-3">Interior Commerce</h2>
+                <p>A warm editorial storefront that gives products room to breathe while keeping shopping paths easy to follow.</p>
+                <a class="case-link" href="./index.html#contact">Discuss a similar project
+                  <svg class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0-7 7m7-7H3" /></svg>
+                </a>
+              </div>
+            </article>
+
+            <article class="work-card portfolio-extra group hidden col-span-12 lg:col-span-8" data-portfolio-item hidden>
+              <div class="w-full lg:grid lg:h-portfolio-card lg:grid-cols-5">
+                <div class="h-64 overflow-hidden border-b border-border-gray sm:h-80 lg:order-2 lg:col-span-3 lg:h-full lg:border-b-0 lg:border-l">
+                  <img class="h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.02]" src="./zuop/Frame 1000001955 (1).webp" alt="Realbrok property brand website design" width="2880" height="8748" loading="lazy" />
+                </div>
+                <div class="flex flex-col justify-between p-6 sm:p-8 lg:order-1 lg:col-span-2">
+                  <div>
+                    <h2 class="heading-card mb-3">Property Brand Experience</h2>
+                    <p>A spacious real estate brand site combining listings, floor plans, social proof, and appointment actions.</p>
+                  </div>
+                  <a class="case-link" href="./index.html#contact">Discuss a similar project
+                    <svg class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0-7 7m7-7H3" /></svg>
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <article class="work-card portfolio-extra group hidden col-span-12 md:col-span-6" data-portfolio-item hidden>
+              <div class="h-64 overflow-hidden border-b border-border-gray sm:h-80">
+                <img class="h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.02]" src="./zuop/Project Detail Page.webp" alt="Bricknet project detail page design" width="2648" height="10000" loading="lazy" />
+              </div>
+              <div class="flex flex-1 flex-col p-6 sm:p-8">
+                <h2 class="heading-card mb-3">Project Storytelling</h2>
+                <p>A detailed case-study template connecting project context, process, outcomes, and related work.</p>
+                <a class="case-link" href="./index.html#contact">Discuss a similar project
+                  <svg class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0-7 7m7-7H3" /></svg>
+                </a>
+              </div>
+            </article>
+
+            <article class="work-card portfolio-extra group hidden col-span-12 md:col-span-6" data-portfolio-item hidden>
+              <div class="h-64 overflow-hidden border-b border-border-gray sm:h-80">
+                <img class="h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.02]" src="./zuop/house-Listing Detail.webp" alt="Urbanet property listing detail website design" width="2742" height="10000" loading="lazy" />
+              </div>
+              <div class="flex flex-1 flex-col p-6 sm:p-8">
+                <h2 class="heading-card mb-3">Listing Detail Experience</h2>
+                <p>A content-rich property detail page that keeps specifications, media, location, and conversion actions easy to scan.</p>
+                <a class="case-link" href="./index.html#contact">Discuss a similar project
+                  <svg class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0-7 7m7-7H3" /></svg>
+                </a>
+              </div>
+            </article>
+          </div>
+
+          <div class="mt-10 flex justify-center">
+            <button class="button-primary w-full sm:w-auto" id="load-more-work" type="button" aria-controls="portfolio-grid" aria-expanded="false">load more</button>
+            <p class="sr-only" id="load-more-status" aria-live="polite"></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="deep-navy" id="contact" aria-labelledby="contact-heading">
+        <div class="section-container flex flex-col items-center justify-between gap-6 py-16 text-center md:flex-row md:py-design-2xl md:text-left">
+          <div>
+            <p class="mb-2 font-heading text-body-small font-bold uppercase tracking-wide text-white">Start a project</p>
+            <h2 class="heading-cta" id="contact-heading">Have a website project in mind?</h2>
+          </div>
+          <a class="button-primary w-full sm:w-auto" href="./index.html#contact">Contact Us <span aria-hidden="true">→</span></a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="deep-navy border-t border-white/20">
+      <div class="section-container grid grid-cols-1 gap-8 py-design-xl md:grid-cols-footer md:gap-design-xl md:py-16">
+        <div>
+          <a href="./index.html#top" aria-label="Wesight home">
+            <img class="mb-5 w-footer-logo rounded-card bg-surface p-3.5" src="./logo.svg" alt="Wesight" width="800" height="190" />
+          </a>
+        </div>
+        <div>
+          <p class="mb-design-m font-heading text-nav font-bold text-white">Services</p>
+          <ul class="list-none space-y-design-s p-0">
+            <li><a class="footer-link" href="#portfolio">Web Design</a></li>
+            <li><a class="footer-link" href="./index.html#landing-pages">Landing Page Service</a></li>
+            <li><a class="footer-link" href="./index.html#solutions">UX/UI Design</a></li>
+            <li><a class="footer-link" href="./index.html#solutions">SEO</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="mb-design-m font-heading text-nav font-bold text-white">Company</p>
+          <ul class="list-none space-y-design-s p-0">
+            <li><a class="footer-link" href="./index.html#about">About</a></li>
+            <li><a class="footer-link" href="./index.html#color-scheme">Color Scheme</a></li>
+            <li><a class="footer-link" href="./index.html#website-template">Website Template</a></li>
+            <li><a class="footer-link" href="./index.html#pricing">Pricing</a></li>
+            <li><a class="footer-link" href="./index.html#contact">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const menuToggle = document.querySelector(".menu-toggle");
+      const primaryNav = document.querySelector(".primary-nav");
+      const loadMoreButton = document.querySelector("#load-more-work");
+      const loadMoreStatus = document.querySelector("#load-more-status");
+      const extraPortfolioItems = document.querySelectorAll(".portfolio-extra");
+
+      function closeMenu() {
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Open navigation");
+        primaryNav.classList.remove("is-open");
+        document.body.classList.remove("menu-open");
+      }
+
+      menuToggle.addEventListener("click", () => {
+        const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+        menuToggle.setAttribute("aria-expanded", String(!isOpen));
+        menuToggle.setAttribute("aria-label", isOpen ? "Open navigation" : "Close navigation");
+        primaryNav.classList.toggle("is-open", !isOpen);
+        document.body.classList.toggle("menu-open", !isOpen);
+      });
+
+      primaryNav.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", closeMenu);
+      });
+
+      window.addEventListener("resize", () => {
+        if (window.innerWidth >= 1024) closeMenu();
+      });
+
+      loadMoreButton.addEventListener("click", () => {
+        extraPortfolioItems.forEach((item) => {
+          item.removeAttribute("hidden");
+          item.classList.remove("hidden");
+        });
+        loadMoreButton.setAttribute("aria-expanded", "true");
+        loadMoreButton.hidden = true;
+        loadMoreButton.classList.add("hidden");
+        loadMoreStatus.textContent = "All portfolio work is now visible.";
+      });
+    </script>
+  </body>
+</html>

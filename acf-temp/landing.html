@@ -1,0 +1,1455 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Browse a categorized collection of landing page templates with lazy-loaded live previews.">
+  <meta name="theme-color" content="#ffffff">
+  <title>Landing Page Gallery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --brand-red: #f03748;
+      --link-red: #df1c13;
+      --dark-navy: #13202f;
+      --body-text: #191919;
+      --muted-text: #626262;
+      --warm-stone: #f5f5f4;
+      --surface: #ffffff;
+      --surface-warm: #f7f1e7;
+      --border: #ebebeb;
+      --preview-height: 270px;
+      --radius-card: 16px;
+      --radius-control: 5px;
+      --radius-pill: 26px;
+      --content-width: 1600px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-width: 0;
+      overflow-x: hidden;
+      background: var(--surface);
+      color: var(--body-text);
+      font-family: "Roboto", Arial, Helvetica, system-ui, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    button,
+    a {
+      font: inherit;
+      touch-action: manipulation;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--link-red);
+      outline-offset: 4px;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      z-index: 1000;
+      transform: translateY(-160%);
+      border-radius: var(--radius-pill);
+      background: var(--dark-navy);
+      color: #ffffff;
+      padding: 10px 20px;
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    .page-header {
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .page-header__inner,
+    .workspace,
+    .page-footer__inner {
+      width: min(100%, var(--content-width));
+      margin-inline: auto;
+      padding-inline: 32px;
+    }
+
+    .page-header__inner {
+      padding-block: 56px 48px;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--link-red);
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      overflow-wrap: break-word;
+    }
+
+    h1 {
+      max-width: 820px;
+      margin: 0 0 16px;
+      color: var(--dark-navy);
+      font-size: clamp(34px, 4vw, 52px);
+      line-height: 1.22;
+      letter-spacing: -0.02em;
+    }
+
+    .page-intro {
+      max-width: 720px;
+      margin: 0;
+      color: var(--muted-text);
+      font-size: 18px;
+    }
+
+    .page-stats {
+      margin: 24px 0 0;
+      color: var(--dark-navy);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .workspace-shell {
+      background: var(--warm-stone);
+    }
+
+    .workspace {
+      display: grid;
+      grid-template-columns: 252px minmax(0, 1fr);
+      align-items: start;
+      gap: 32px;
+      padding-block: 40px 64px;
+    }
+
+    .category-panel {
+      position: sticky;
+      top: 24px;
+      max-height: calc(100vh - 48px);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      background: var(--surface);
+    }
+
+    .category-panel__heading {
+      margin: 0;
+      border-bottom: 1px solid var(--border);
+      padding: 20px 20px 16px;
+      color: var(--dark-navy);
+      font-size: 18px;
+      line-height: 1.4;
+    }
+
+    .category-list {
+      display: flex;
+      max-height: calc(100vh - 114px);
+      overflow-y: auto;
+      flex-direction: column;
+      gap: 4px;
+      padding: 12px;
+      scrollbar-width: thin;
+      overscroll-behavior: contain;
+    }
+
+    .category-button {
+      display: flex;
+      min-height: 46px;
+      width: 100%;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border: 0;
+      border-left: 3px solid transparent;
+      border-radius: var(--radius-control);
+      background: transparent;
+      padding: 10px 12px;
+      color: var(--body-text);
+      text-align: left;
+      transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease;
+    }
+
+    .category-button:hover {
+      background: var(--warm-stone);
+      color: var(--dark-navy);
+    }
+
+    .category-button.is-active {
+      border-left-color: var(--brand-red);
+      background: #fff1f2;
+      color: var(--link-red);
+      font-weight: 700;
+    }
+
+    .category-count {
+      flex: 0 0 auto;
+      color: var(--muted-text);
+      font-size: 12px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .category-button.is-active .category-count {
+      color: var(--link-red);
+    }
+
+    .gallery-section {
+      min-width: 0;
+    }
+
+    .gallery-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .gallery-heading h2 {
+      margin: 0 0 4px;
+      color: var(--dark-navy);
+      font-size: 32px;
+      line-height: 1.35;
+    }
+
+    .gallery-heading p {
+      margin: 0;
+      color: var(--muted-text);
+      font-size: 14px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .gallery-grid[hidden] {
+      display: none;
+    }
+
+    .landing-card {
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      background: var(--surface);
+      transition: border-color 200ms ease;
+      content-visibility: auto;
+      contain-intrinsic-size: 380px;
+    }
+
+    .landing-card:hover,
+    .landing-card:focus-within {
+      border-color: var(--brand-red);
+    }
+
+    .preview-shell {
+      position: relative;
+      height: var(--preview-height);
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+      background: #eeeeec;
+      isolation: isolate;
+    }
+
+    .preview-shell iframe {
+      display: block;
+      width: 333.3333%;
+      height: 900px;
+      border: 0;
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(0.3);
+      transform-origin: top left;
+      transition: opacity 220ms ease, filter 220ms ease;
+      filter: saturate(0.94);
+    }
+
+    .landing-card.is-loaded iframe {
+      opacity: 1;
+    }
+
+    .landing-card:hover iframe {
+      filter: saturate(1);
+    }
+
+    .preview-status {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      display: grid;
+      place-items: center;
+      color: var(--muted-text);
+      font-size: 13px;
+    }
+
+    .landing-card.is-loaded .preview-status {
+      visibility: hidden;
+    }
+
+    .card-footer {
+      display: flex;
+      min-height: 94px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 20px;
+    }
+
+    .card-title {
+      min-width: 0;
+      margin: 0;
+      color: var(--dark-navy);
+      font-size: 18px;
+      line-height: 1.4;
+    }
+
+    .open-link {
+      display: inline-flex;
+      min-height: 44px;
+      flex: 0 0 auto;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border-radius: var(--radius-pill);
+      background: var(--brand-red);
+      padding: 10px 18px;
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      opacity: 0.58;
+      transition: background-color 180ms ease, opacity 180ms ease;
+    }
+
+    .landing-card:hover .open-link,
+    .landing-card:focus-within .open-link {
+      background: var(--link-red);
+      opacity: 1;
+    }
+
+    .open-link svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .empty-state {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      background: var(--surface);
+      padding: 32px;
+      color: var(--muted-text);
+    }
+
+    .page-footer {
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .page-footer__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding-block: 24px;
+      color: var(--muted-text);
+      font-size: 14px;
+    }
+
+    .page-footer p {
+      margin: 0;
+    }
+
+    .page-footer a {
+      color: var(--link-red);
+      font-weight: 700;
+      text-underline-offset: 3px;
+    }
+
+    .noscript-message {
+      margin: 24px;
+      border: 1px solid var(--brand-red);
+      border-radius: var(--radius-control);
+      background: #fff1f2;
+      padding: 16px;
+      color: var(--dark-navy);
+    }
+
+    @media (max-width: 1279px) {
+      .workspace {
+        grid-template-columns: 210px minmax(0, 1fr);
+        gap: 24px;
+        padding-inline: 24px;
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 767px) {
+      :root {
+        --preview-height: 240px;
+      }
+
+      .page-header__inner,
+      .workspace,
+      .page-footer__inner {
+        padding-inline: 16px;
+      }
+
+      .page-header__inner {
+        padding-block: 40px 36px;
+      }
+
+      h1 {
+        font-size: 32px;
+      }
+
+      .page-intro {
+        font-size: 16px;
+      }
+
+      .workspace {
+        display: block;
+        padding-block: 24px 48px;
+      }
+
+      .category-panel {
+        position: static;
+        max-height: none;
+        margin-bottom: 28px;
+        overflow: visible;
+        border-radius: var(--radius-control);
+      }
+
+      .category-panel__heading {
+        padding: 16px 16px 12px;
+        font-size: 16px;
+      }
+
+      .category-list {
+        max-height: none;
+        overflow-x: auto;
+        overflow-y: hidden;
+        flex-direction: row;
+        padding: 10px 12px 12px;
+        scrollbar-width: thin;
+      }
+
+      .category-button {
+        min-height: 44px;
+        width: auto;
+        flex: 0 0 auto;
+        border-left: 0;
+        border-bottom: 3px solid transparent;
+        white-space: nowrap;
+      }
+
+      .category-button.is-active {
+        border-bottom-color: var(--brand-red);
+      }
+
+      .gallery-heading {
+        align-items: start;
+      }
+
+      .gallery-heading h2 {
+        font-size: 28px;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .card-footer {
+        min-height: 88px;
+        padding: 16px;
+      }
+
+      .card-title {
+        font-size: 17px;
+      }
+
+      .open-link {
+        opacity: 1;
+      }
+
+      .page-footer__inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (hover: none) {
+      .open-link {
+        opacity: 1;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#gallery-content">Skip to landing page gallery</a>
+
+  <header class="page-header">
+    <div class="page-header__inner">
+      <p class="eyebrow">Template library</p>
+      <h1>Landing Page Gallery</h1>
+      <p class="page-intro">Browse landing page concepts by business category. Live previews load only when they approach the viewport.</p>
+      <p class="page-stats" id="page-stats" aria-live="polite"></p>
+    </div>
+  </header>
+
+  <main class="workspace-shell" id="gallery-content">
+    <div class="workspace">
+      <aside class="category-panel" aria-labelledby="categories-heading">
+        <h2 class="category-panel__heading" id="categories-heading">Categories</h2>
+        <nav class="category-list" id="category-list" aria-label="Landing page categories"></nav>
+      </aside>
+
+      <section class="gallery-section" aria-labelledby="current-category-title">
+        <div class="gallery-heading">
+          <div>
+            <h2 id="current-category-title"></h2>
+            <p id="current-category-count"></p>
+          </div>
+        </div>
+        <div id="gallery-panels"></div>
+      </section>
+    </div>
+  </main>
+
+  <noscript>
+    <p class="noscript-message">JavaScript is required to organize categories and lazy-load landing page previews.</p>
+  </noscript>
+
+  <footer class="page-footer">
+    <div class="page-footer__inner">
+      <p>Landing Page Gallery</p>
+      <p><span id="footer-count"></span> local HTML templates</p>
+    </div>
+  </footer>
+
+  <script>
+    const LANDING_FILES = [
+  "agency-consulting-001-digital-marketing-agency.html",
+  "agency-consulting-002-creative-agency.html",
+  "agency-consulting-003-seo-agency.html",
+  "agency-consulting-004-paid-ads-agency.html",
+  "agency-consulting-005-social-media-agency.html",
+  "agency-consulting-006-content-marketing-agency.html",
+  "agency-consulting-007-ai-services-agency.html",
+  "agency-consulting-008-brand-strategy-agency.html",
+  "agency-consulting-009-web-design-agency.html",
+  "agency-consulting-010-product-design-agency.html",
+  "agency-consulting-011-visual-design-studio.html",
+  "agency-consulting-012-management-consulting.html",
+  "agency-consulting-013-business-consulting.html",
+  "agency-consulting-014-strategy-consulting.html",
+  "agency-consulting-015-it-consulting.html",
+  "agency-consulting-016-data-analysis-firm.html",
+  "agency-consulting-017-financial-consulting.html",
+  "agency-consulting-018-hr-consulting.html",
+  "agency-consulting-019-business-coaching.html",
+  "agency-consulting-020-executive-coaching.html",
+  "agency-consulting-021-life-coaching.html",
+  "agency-consulting-022-career-coaching.html",
+  "agency-consulting-023-sales-training.html",
+  "agency-consulting-024-pr-firm.html",
+  "agency-consulting-025-crisis-pr.html",
+  "agency-consulting-026-ad-agency.html",
+  "agency-consulting-027-media-agency.html",
+  "agency-consulting-028-recruitment-agency.html",
+  "agency-consulting-029-headhunter.html",
+  "agency-consulting-030-offshore-development.html",
+  "automotive-001-new-car-dealership.html",
+  "automotive-002-used-car-dealer.html",
+  "automotive-003-luxury-car-dealer.html",
+  "automotive-004-auto-parts-store.html",
+  "automotive-005-used-auto-parts.html",
+  "automotive-006-auto-repair-shop.html",
+  "automotive-007-auto-body-collision.html",
+  "automotive-008-transmission-repair.html",
+  "automotive-009-brake-service.html",
+  "automotive-010-tire-shop.html",
+  "automotive-011-oil-change-lube.html",
+  "automotive-012-car-wash.html",
+  "automotive-013-car-detailing.html",
+  "automotive-014-towing-service.html",
+  "automotive-015-car-rental.html",
+  "automotive-016-exotic-car-rental.html",
+  "automotive-017-motorcycle-dealer.html",
+  "automotive-018-motorcycle-repair.html",
+  "automotive-019-rv-dealer.html",
+  "automotive-020-driving-school.html",
+  "childcare-kids-001-daycare-center.html",
+  "childcare-kids-002-in-home-daycare.html",
+  "childcare-kids-003-nanny-agency.html",
+  "childcare-kids-004-au-pair-agency.html",
+  "childcare-kids-005-babysitting-service.html",
+  "childcare-kids-006-kids-learning-center.html",
+  "childcare-kids-007-kids-tutoring.html",
+  "childcare-kids-008-kids-stem-program.html",
+  "childcare-kids-009-kids-language-school.html",
+  "childcare-kids-010-kids-art-classes.html",
+  "childcare-kids-011-kids-music-lessons.html",
+  "childcare-kids-012-kids-dance-school.html",
+  "childcare-kids-013-kids-gymnastics.html",
+  "childcare-kids-014-kids-martial-arts.html",
+  "childcare-kids-015-kids-swim-lessons.html",
+  "childcare-kids-016-youth-sports-league.html",
+  "childcare-kids-017-indoor-playground.html",
+  "childcare-kids-018-bounce-house-rental.html",
+  "childcare-kids-019-kids-party-venue.html",
+  "childcare-kids-020-kids-entertainer.html",
+  "childcare-kids-021-character-entertainment.html",
+  "childcare-kids-022-kids-magician.html",
+  "childcare-kids-023-summer-camp.html",
+  "childcare-kids-024-day-camp.html",
+  "childcare-kids-025-specialty-camp-art-science.html",
+  "construction-trades-001-construction-company.html",
+  "construction-trades-002-commercial-construction.html",
+  "construction-trades-003-residential-construction.html",
+  "construction-trades-004-industrial-construction.html",
+  "construction-trades-005-demolition-contractor.html",
+  "construction-trades-006-excavation-grading.html",
+  "construction-trades-007-foundation-contractor.html",
+  "construction-trades-008-framing-contractor.html",
+  "construction-trades-009-drywall-contractor.html",
+  "construction-trades-010-insulation-contractor.html",
+  "construction-trades-011-siding-company.html",
+  "construction-trades-012-stucco-contractor.html",
+  "construction-trades-013-waterproofing-service.html",
+  "construction-trades-014-asphalt-paving.html",
+  "construction-trades-015-welding-services.html",
+  "construction-trades-016-structural-steel.html",
+  "construction-trades-017-glass-glazing.html",
+  "construction-trades-018-elevator-service.html",
+  "construction-trades-019-fire-sprinkler.html",
+  "construction-trades-020-scaffolding-rental.html",
+  "construction-trades-021-crane-service.html",
+  "construction-trades-022-land-surveying.html",
+  "construction-trades-023-environmental-remediation.html",
+  "construction-trades-024-asbestos-lead-removal.html",
+  "construction-trades-025-historic-restoration.html",
+  "ecommerce-retail-001-fashion-boutique.html",
+  "ecommerce-retail-002-luxury-fashion-brand.html",
+  "ecommerce-retail-003-streetwear-brand.html",
+  "ecommerce-retail-004-eco-friendly-fashion.html",
+  "ecommerce-retail-005-skincare-brand.html",
+  "ecommerce-retail-006-makeup-brand.html",
+  "ecommerce-retail-007-hair-products-brand.html",
+  "ecommerce-retail-008-tech-gadgets-store.html",
+  "ecommerce-retail-009-audio-equipment-store.html",
+  "ecommerce-retail-010-furniture-store.html",
+  "ecommerce-retail-011-home-decor-store.html",
+  "ecommerce-retail-012-kitchenware-store.html",
+  "ecommerce-retail-013-gourmet-food-store.html",
+  "ecommerce-retail-014-coffee-brand.html",
+  "ecommerce-retail-015-organic-food-store.html",
+  "ecommerce-retail-016-jewelry-brand.html",
+  "ecommerce-retail-017-watch-brand.html",
+  "ecommerce-retail-018-sportswear-brand.html",
+  "ecommerce-retail-019-sports-equipment-store.html",
+  "ecommerce-retail-020-toy-store.html",
+  "ecommerce-retail-021-kids-clothing-store.html",
+  "ecommerce-retail-022-pet-supplies-store.html",
+  "ecommerce-retail-023-pet-food-brand.html",
+  "ecommerce-retail-024-outdoor-gear-store.html",
+  "ecommerce-retail-025-garden-supplies-store.html",
+  "ecommerce-retail-026-subscription-box-service.html",
+  "ecommerce-retail-027-meal-kit-delivery.html",
+  "ecommerce-retail-028-handmade-marketplace.html",
+  "ecommerce-retail-029-vintage-marketplace.html",
+  "ecommerce-retail-030-digital-products-store.html",
+  "ecommerce-retail-031-design-templates-store.html",
+  "ecommerce-retail-032-supplements-brand.html",
+  "ecommerce-retail-033-cbd-products-store.html",
+  "ecommerce-retail-034-auto-parts-store.html",
+  "ecommerce-retail-035-car-accessories-store.html",
+  "ecommerce-retail-036-online-bookstore.html",
+  "ecommerce-retail-037-art-prints-store.html",
+  "ecommerce-retail-038-gift-shop.html",
+  "ecommerce-retail-039-custom-gifts-store.html",
+  "ecommerce-retail-040-luxury-goods-store.html",
+  "education-training-001-private-school.html",
+  "education-training-002-charter-school.html",
+  "education-training-003-montessori-school.html",
+  "education-training-004-international-school.html",
+  "education-training-005-preschool-daycare.html",
+  "education-training-006-montessori-preschool.html",
+  "education-training-007-tutoring-center.html",
+  "education-training-008-math-tutoring.html",
+  "education-training-009-reading-writing-tutoring.html",
+  "education-training-010-special-needs-tutoring.html",
+  "education-training-011-sat-act-prep.html",
+  "education-training-012-college-counseling.html",
+  "education-training-013-language-school.html",
+  "education-training-014-esl-school.html",
+  "education-training-015-music-school.html",
+  "education-training-016-music-lessons.html",
+  "education-training-017-art-school.html",
+  "education-training-018-art-classes.html",
+  "education-training-019-coding-bootcamp.html",
+  "education-training-020-coding-for-kids.html",
+  "education-training-021-stem-education.html",
+  "education-training-022-e-learning-platform.html",
+  "education-training-023-course-sales-page.html",
+  "education-training-024-membership-site.html",
+  "education-training-025-corporate-training.html",
+  "education-training-026-certification-program.html",
+  "education-training-027-trade-vocational-school.html",
+  "education-training-028-cdl-training.html",
+  "education-training-029-summer-camp.html",
+  "education-training-030-after-school-program.html",
+  "events-entertainment-001-wedding-planner.html",
+  "events-entertainment-002-event-planner.html",
+  "events-entertainment-003-corporate-event-planner.html",
+  "events-entertainment-004-kids-party-planner.html",
+  "events-entertainment-005-dj-service.html",
+  "events-entertainment-006-live-band-musician.html",
+  "events-entertainment-007-event-catering.html",
+  "events-entertainment-008-photo-booth-rental.html",
+  "events-entertainment-009-kids-entertainer.html",
+  "events-entertainment-010-event-venue-rental.html",
+  "fitness-sports-001-fitness-center.html",
+  "fitness-sports-002-crossfit-box.html",
+  "fitness-sports-003-boutique-gym.html",
+  "fitness-sports-004-yoga-studio.html",
+  "fitness-sports-005-hot-yoga-studio.html",
+  "fitness-sports-006-pilates-studio.html",
+  "fitness-sports-007-reformer-pilates.html",
+  "fitness-sports-008-dance-studio.html",
+  "fitness-sports-009-ballet-school.html",
+  "fitness-sports-010-hip-hop-dance.html",
+  "fitness-sports-011-martial-arts-studio.html",
+  "fitness-sports-012-mma-gym.html",
+  "fitness-sports-013-boxing-gym.html",
+  "fitness-sports-014-karate-dojo.html",
+  "fitness-sports-015-jiu-jitsu-academy.html",
+  "fitness-sports-016-personal-trainer.html",
+  "fitness-sports-017-online-fitness-coach.html",
+  "fitness-sports-018-strength-coach.html",
+  "fitness-sports-019-swimming-pool-aquatics.html",
+  "fitness-sports-020-swim-school.html",
+  "fitness-sports-021-tennis-club.html",
+  "fitness-sports-022-tennis-instructor.html",
+  "fitness-sports-023-golf-course.html",
+  "fitness-sports-024-golf-instructor.html",
+  "fitness-sports-025-rock-climbing-gym.html",
+  "fitness-sports-026-spin-cycling-studio.html",
+  "fitness-sports-027-bike-shop.html",
+  "fitness-sports-028-running-club.html",
+  "fitness-sports-029-running-store.html",
+  "fitness-sports-030-youth-sports-league.html",
+  "fitness-sports-031-adult-sports-league.html",
+  "fitness-sports-032-adventure-outfitter.html",
+  "fitness-sports-033-kayak-paddleboard-rental.html",
+  "fitness-sports-034-ski-school.html",
+  "fitness-sports-035-surf-school.html",
+  "fitness-sports-036-horse-riding-lessons.html",
+  "fitness-sports-037-horse-boarding.html",
+  "fitness-sports-038-shooting-range.html",
+  "fitness-sports-039-trampoline-park.html",
+  "fitness-sports-040-children-s-play-center.html",
+  "food-hospitality-001-fine-dining-restaurant.html",
+  "food-hospitality-002-casual-restaurant.html",
+  "food-hospitality-003-italian-restaurant.html",
+  "food-hospitality-004-japanese-restaurant.html",
+  "food-hospitality-005-mexican-restaurant.html",
+  "food-hospitality-006-indian-restaurant.html",
+  "food-hospitality-007-thai-restaurant.html",
+  "food-hospitality-008-steakhouse.html",
+  "food-hospitality-009-seafood-restaurant.html",
+  "food-hospitality-010-vegan-restaurant.html",
+  "food-hospitality-011-burger-joint.html",
+  "food-hospitality-012-pizza-restaurant.html",
+  "food-hospitality-013-taco-shop.html",
+  "food-hospitality-014-coffee-shop.html",
+  "food-hospitality-015-bakery-cafe.html",
+  "food-hospitality-016-tea-house.html",
+  "food-hospitality-017-dessert-cafe.html",
+  "food-hospitality-018-cocktail-bar.html",
+  "food-hospitality-019-wine-bar.html",
+  "food-hospitality-020-sports-bar.html",
+  "food-hospitality-021-craft-brewery.html",
+  "food-hospitality-022-luxury-hotel.html",
+  "food-hospitality-023-boutique-hotel.html",
+  "food-hospitality-024-beach-resort.html",
+  "food-hospitality-025-bed-and-breakfast.html",
+  "food-hospitality-026-hostel.html",
+  "food-hospitality-027-motel.html",
+  "food-hospitality-028-event-catering.html",
+  "food-hospitality-029-corporate-catering.html",
+  "food-hospitality-030-wedding-catering.html",
+  "food-hospitality-031-food-truck.html",
+  "food-hospitality-032-gourmet-food-truck.html",
+  "food-hospitality-033-meal-prep-service.html",
+  "food-hospitality-034-fitness-meal-prep.html",
+  "food-hospitality-035-juice-bar.html",
+  "food-hospitality-036-ice-cream-shop.html",
+  "food-hospitality-037-deli-sandwich-shop.html",
+  "food-hospitality-038-winery.html",
+  "food-hospitality-039-distillery.html",
+  "food-hospitality-040-nightclub.html",
+  "food-hospitality-041-wedding-venue.html",
+  "food-hospitality-042-conference-center.html",
+  "food-hospitality-043-banquet-hall.html",
+  "food-hospitality-044-food-delivery-service.html",
+  "food-hospitality-045-grocery-store.html",
+  "food-hospitality-046-organic-grocery.html",
+  "food-hospitality-047-butcher-shop.html",
+  "food-hospitality-048-cheese-shop.html",
+  "food-hospitality-049-seafood-market.html",
+  "food-hospitality-050-farmers-market.html",
+  "healthcare-wellness-001-family-doctor-clinic.html",
+  "healthcare-wellness-002-walk-in-clinic.html",
+  "healthcare-wellness-003-pediatric-clinic.html",
+  "healthcare-wellness-004-dental-clinic.html",
+  "healthcare-wellness-005-orthodontics-practice.html",
+  "healthcare-wellness-006-cosmetic-dentistry.html",
+  "healthcare-wellness-007-kids-dentist.html",
+  "healthcare-wellness-008-dermatology-clinic.html",
+  "healthcare-wellness-009-cosmetic-dermatology.html",
+  "healthcare-wellness-010-plastic-surgery.html",
+  "healthcare-wellness-011-cosmetic-surgery.html",
+  "healthcare-wellness-012-eye-doctor.html",
+  "healthcare-wellness-013-lasik-center.html",
+  "healthcare-wellness-014-cardiology-practice.html",
+  "healthcare-wellness-015-orthopedic-clinic.html",
+  "healthcare-wellness-016-sports-medicine.html",
+  "healthcare-wellness-017-physical-therapy.html",
+  "healthcare-wellness-018-sports-rehab.html",
+  "healthcare-wellness-019-chiropractor.html",
+  "healthcare-wellness-020-therapist-counselor.html",
+  "healthcare-wellness-021-psychiatrist.html",
+  "healthcare-wellness-022-psychologist.html",
+  "healthcare-wellness-023-marriage-counseling.html",
+  "healthcare-wellness-024-child-psychologist.html",
+  "healthcare-wellness-025-addiction-treatment.html",
+  "healthcare-wellness-026-ob-gyn-practice.html",
+  "healthcare-wellness-027-fertility-clinic.html",
+  "healthcare-wellness-028-holistic-health-center.html",
+  "healthcare-wellness-029-naturopathic-doctor.html",
+  "healthcare-wellness-030-acupuncture-clinic.html",
+  "healthcare-wellness-031-massage-therapy.html",
+  "healthcare-wellness-032-medical-spa.html",
+  "healthcare-wellness-033-botox-fillers-clinic.html",
+  "healthcare-wellness-034-laser-treatment-center.html",
+  "healthcare-wellness-035-nutrition-counseling.html",
+  "healthcare-wellness-036-weight-loss-clinic.html",
+  "healthcare-wellness-037-home-healthcare.html",
+  "healthcare-wellness-038-senior-home-care.html",
+  "healthcare-wellness-039-veterinary-clinic.html",
+  "healthcare-wellness-040-pet-emergency-hospital.html",
+  "healthcare-wellness-041-specialty-vet.html",
+  "healthcare-wellness-042-hair-salon.html",
+  "healthcare-wellness-043-barbershop.html",
+  "healthcare-wellness-044-nail-salon.html",
+  "healthcare-wellness-045-day-spa.html",
+  "healthcare-wellness-046-wellness-spa.html",
+  "healthcare-wellness-047-lash-extensions.html",
+  "healthcare-wellness-048-brow-microblading.html",
+  "healthcare-wellness-049-makeup-artist.html",
+  "healthcare-wellness-050-esthetician-facial-studio.html",
+  "home-services-001-plumber.html",
+  "home-services-002-emergency-plumber.html",
+  "home-services-003-drain-cleaning.html",
+  "home-services-004-electrician.html",
+  "home-services-005-residential-electrical.html",
+  "home-services-006-commercial-electrical.html",
+  "home-services-007-hvac-company.html",
+  "home-services-008-ac-repair-install.html",
+  "home-services-009-heating-service.html",
+  "home-services-010-roofing-company.html",
+  "home-services-011-residential-roofing.html",
+  "home-services-012-commercial-roofing.html",
+  "home-services-013-general-contractor.html",
+  "home-services-014-remodeling-contractor.html",
+  "home-services-015-interior-painting.html",
+  "home-services-016-exterior-painting.html",
+  "home-services-017-flooring-company.html",
+  "home-services-018-hardwood-flooring.html",
+  "home-services-019-tile-installation.html",
+  "home-services-020-window-installation.html",
+  "home-services-021-window-replacement.html",
+  "home-services-022-door-installation.html",
+  "home-services-023-garage-door-service.html",
+  "home-services-024-fence-company.html",
+  "home-services-025-deck-builder.html",
+  "home-services-026-concrete-contractor.html",
+  "home-services-027-masonry-stonework.html",
+  "home-services-028-handyman-service.html",
+  "home-services-029-landscaping-company.html",
+  "home-services-030-landscape-design.html",
+  "home-services-031-lawn-care-service.html",
+  "home-services-032-tree-service.html",
+  "home-services-033-tree-removal.html",
+  "home-services-034-sprinkler-irrigation.html",
+  "home-services-035-pool-builder.html",
+  "home-services-036-pool-maintenance.html",
+  "home-services-037-pest-control.html",
+  "home-services-038-termite-control.html",
+  "home-services-039-house-cleaning.html",
+  "home-services-040-commercial-cleaning.html",
+  "home-services-041-deep-cleaning-service.html",
+  "home-services-042-move-in-out-cleaning.html",
+  "home-services-043-carpet-cleaning.html",
+  "home-services-044-window-cleaning.html",
+  "home-services-045-pressure-washing.html",
+  "home-services-046-appliance-repair.html",
+  "home-services-047-locksmith.html",
+  "home-services-048-security-system-install.html",
+  "home-services-049-smart-home-installation.html",
+  "home-services-050-solar-panel-installation.html",
+  "home-services-051-generator-installation.html",
+  "home-services-052-septic-service.html",
+  "home-services-053-water-softener-filtration.html",
+  "home-services-054-junk-removal.html",
+  "home-services-055-dumpster-rental.html",
+  "home-services-056-professional-organizing.html",
+  "home-services-057-closet-organization.html",
+  "home-services-058-water-damage-restoration.html",
+  "home-services-059-fire-damage-restoration.html",
+  "home-services-060-mold-remediation.html",
+  "nonprofit-community-001-nonprofit-organization.html",
+  "nonprofit-community-002-charitable-organization.html",
+  "nonprofit-community-003-private-foundation.html",
+  "nonprofit-community-004-humanitarian-aid.html",
+  "nonprofit-community-005-environmental-nonprofit.html",
+  "nonprofit-community-006-animal-rescue-shelter.html",
+  "nonprofit-community-007-health-focused-nonprofit.html",
+  "nonprofit-community-008-educational-nonprofit.html",
+  "nonprofit-community-009-youth-development.html",
+  "nonprofit-community-010-community-organization.html",
+  "nonprofit-community-011-church-website.html",
+  "nonprofit-community-012-synagogue.html",
+  "nonprofit-community-013-islamic-center.html",
+  "nonprofit-community-014-buddhist-hindu-temple.html",
+  "nonprofit-community-015-ministry-outreach.html",
+  "nonprofit-community-016-professional-association.html",
+  "nonprofit-community-017-community-club-rotary-lions.html",
+  "nonprofit-community-018-advocacy-organization.html",
+  "nonprofit-community-019-political-campaign.html",
+  "nonprofit-community-020-political-fundraising.html",
+  "pet-services-001-pet-supply-store.html",
+  "pet-services-002-specialty-pet-store.html",
+  "pet-services-003-dog-grooming.html",
+  "pet-services-004-cat-grooming.html",
+  "pet-services-005-mobile-pet-grooming.html",
+  "pet-services-006-dog-boarding-kennel.html",
+  "pet-services-007-cat-boarding.html",
+  "pet-services-008-luxury-pet-hotel.html",
+  "pet-services-009-dog-daycare.html",
+  "pet-services-010-pet-sitting-service.html",
+  "pet-services-011-dog-walking-service.html",
+  "pet-services-012-dog-training.html",
+  "pet-services-013-puppy-training.html",
+  "pet-services-014-obedience-school.html",
+  "pet-services-015-service-dog-training.html",
+  "pet-services-016-pet-photographer.html",
+  "pet-services-017-animal-rescue.html",
+  "pet-services-018-animal-shelter.html",
+  "pet-services-019-pet-cremation-memorial.html",
+  "pet-services-020-pet-insurance.html",
+  "portfolio-creative-001-creative-portfolio.html",
+  "portfolio-creative-002-minimal-portfolio.html",
+  "portfolio-creative-003-dark-portfolio.html",
+  "portfolio-creative-004-bold-portfolio.html",
+  "portfolio-creative-005-gallery-focused-portfolio.html",
+  "portfolio-creative-006-photographer-portfolio.html",
+  "portfolio-creative-007-wedding-photographer.html",
+  "portfolio-creative-008-portrait-photographer.html",
+  "portfolio-creative-009-commercial-photographer.html",
+  "portfolio-creative-010-real-estate-photographer.html",
+  "portfolio-creative-011-videographer-portfolio.html",
+  "portfolio-creative-012-wedding-videographer.html",
+  "portfolio-creative-013-commercial-video-production.html",
+  "portfolio-creative-014-graphic-designer-portfolio.html",
+  "portfolio-creative-015-web-designer-portfolio.html",
+  "portfolio-creative-016-product-designer-portfolio.html",
+  "portfolio-creative-017-illustrator-portfolio.html",
+  "portfolio-creative-018-motion-designer-portfolio.html",
+  "portfolio-creative-019-artist-portfolio.html",
+  "portfolio-creative-020-digital-artist.html",
+  "portfolio-creative-021-nft-artist.html",
+  "portfolio-creative-022-music-artist-epk.html",
+  "portfolio-creative-023-music-producer.html",
+  "portfolio-creative-024-dj-portfolio.html",
+  "portfolio-creative-025-author-website.html",
+  "portfolio-creative-026-copywriter-portfolio.html",
+  "portfolio-creative-027-journalist-portfolio.html",
+  "portfolio-creative-028-professional-blogger.html",
+  "portfolio-creative-029-film-director.html",
+  "portfolio-creative-030-actor-portfolio.html",
+  "portfolio-creative-031-architecture-portfolio.html",
+  "portfolio-creative-032-interior-designer.html",
+  "portfolio-creative-033-fashion-designer.html",
+  "portfolio-creative-034-model-portfolio.html",
+  "portfolio-creative-035-personal-bio-page.html",
+  "portfolio-creative-036-online-resume.html",
+  "portfolio-creative-037-public-speaker.html",
+  "portfolio-creative-038-content-creator.html",
+  "portfolio-creative-039-podcast-host.html",
+  "portfolio-creative-040-youtube-creator.html",
+  "professional-services-001-law-firm.html",
+  "professional-services-002-personal-injury-lawyer.html",
+  "professional-services-003-criminal-defense-attorney.html",
+  "professional-services-004-family-law-divorce.html",
+  "professional-services-005-estate-planning-attorney.html",
+  "professional-services-006-business-attorney.html",
+  "professional-services-007-immigration-lawyer.html",
+  "professional-services-008-bankruptcy-attorney.html",
+  "professional-services-009-real-estate-attorney.html",
+  "professional-services-010-employment-lawyer.html",
+  "professional-services-011-cpa-firm.html",
+  "professional-services-012-bookkeeping-service.html",
+  "professional-services-013-tax-preparation.html",
+  "professional-services-014-payroll-service.html",
+  "professional-services-015-financial-advisor.html",
+  "professional-services-016-wealth-management.html",
+  "professional-services-017-retirement-planning.html",
+  "professional-services-018-insurance-agency.html",
+  "professional-services-019-life-insurance-agent.html",
+  "professional-services-020-health-insurance-broker.html",
+  "professional-services-021-auto-home-insurance.html",
+  "professional-services-022-business-insurance.html",
+  "professional-services-023-credit-repair.html",
+  "professional-services-024-credit-counseling.html",
+  "professional-services-025-notary-public.html",
+  "professional-services-026-translation-services.html",
+  "professional-services-027-interpretation-services.html",
+  "professional-services-028-private-investigator.html",
+  "professional-services-029-security-guard-service.html",
+  "professional-services-030-answering-service.html",
+  "professional-services-031-virtual-assistant.html",
+  "professional-services-032-print-shop.html",
+  "professional-services-033-shipping-mailbox-store.html",
+  "professional-services-034-staffing-agency.html",
+  "professional-services-035-temp-agency.html",
+  "professional-services-036-background-check-service.html",
+  "professional-services-037-drug-testing-service.html",
+  "professional-services-038-process-server.html",
+  "professional-services-039-court-reporter.html",
+  "professional-services-040-mediation-services.html",
+  "real-estate-property-001-real-estate-agency.html",
+  "real-estate-property-002-individual-realtor.html",
+  "real-estate-property-003-luxury-real-estate.html",
+  "real-estate-property-004-commercial-real-estate.html",
+  "real-estate-property-005-real-estate-investment.html",
+  "real-estate-property-006-property-development.html",
+  "real-estate-property-007-new-home-sales.html",
+  "real-estate-property-008-condo-sales.html",
+  "real-estate-property-009-land-broker.html",
+  "real-estate-property-010-farm-ranch.html",
+  "real-estate-property-011-property-showcase.html",
+  "real-estate-property-012-for-sale-by-owner.html",
+  "real-estate-property-013-luxury-property-listing.html",
+  "real-estate-property-014-luxury-apartment.html",
+  "real-estate-property-015-property-management.html",
+  "real-estate-property-016-apartment-complex.html",
+  "real-estate-property-017-rooms-for-rent.html",
+  "real-estate-property-018-student-housing.html",
+  "real-estate-property-019-senior-living-community.html",
+  "real-estate-property-020-mortgage-broker.html",
+  "real-estate-property-021-mortgage-lender.html",
+  "real-estate-property-022-refinance-specialist.html",
+  "real-estate-property-023-title-company.html",
+  "real-estate-property-024-real-estate-appraisal.html",
+  "real-estate-property-025-home-inspection.html",
+  "real-estate-property-026-home-staging.html",
+  "real-estate-property-027-moving-company.html",
+  "real-estate-property-028-storage-facility.html",
+  "real-estate-property-029-residential-interior-design.html",
+  "real-estate-property-030-commercial-interior-design.html",
+  "real-estate-property-031-residential-architect.html",
+  "real-estate-property-032-commercial-architect.html",
+  "real-estate-property-033-custom-home-builder.html",
+  "real-estate-property-034-production-builder.html",
+  "real-estate-property-035-home-remodeling.html",
+  "real-estate-property-036-kitchen-remodeling.html",
+  "real-estate-property-037-bathroom-remodeling.html",
+  "real-estate-property-038-basement-finishing.html",
+  "real-estate-property-039-adu-guest-house-builder.html",
+  "real-estate-property-040-tiny-home-builder.html",
+  "senior-services-001-independent-living.html",
+  "senior-services-002-assisted-living.html",
+  "senior-services-003-memory-care-facility.html",
+  "senior-services-004-nursing-home.html",
+  "senior-services-005-continuing-care-community.html",
+  "senior-services-006-home-care-agency.html",
+  "senior-services-007-companion-care.html",
+  "senior-services-008-personal-care-aide.html",
+  "senior-services-009-skilled-nursing-home.html",
+  "senior-services-010-hospice-care.html",
+  "senior-services-011-palliative-care.html",
+  "senior-services-012-adult-day-care.html",
+  "senior-services-013-senior-transportation.html",
+  "senior-services-014-senior-meal-delivery.html",
+  "senior-services-015-geriatric-care-manager.html",
+  "senior-services-016-senior-move-manager.html",
+  "senior-services-017-funeral-home.html",
+  "senior-services-018-cremation-service.html",
+  "senior-services-019-cemetery.html",
+  "senior-services-020-memorial-planning.html",
+  "technology-saas-001-hero-focused-conversion-page.html",
+  "technology-saas-002-feature-rich-multi-section.html",
+  "technology-saas-003-dark-theme-modern.html",
+  "technology-saas-004-minimal-clean.html",
+  "technology-saas-005-bold-creative.html",
+  "technology-saas-006-ai-assistant-chatbot-product.html",
+  "technology-saas-007-ai-writing-tool.html",
+  "technology-saas-008-ai-image-generator.html",
+  "technology-saas-009-team-collaboration-tool.html",
+  "technology-saas-010-task-management-app.html",
+  "technology-saas-011-sales-crm-platform.html",
+  "technology-saas-012-customer-support-platform.html",
+  "technology-saas-013-business-intelligence-dashboard.html",
+  "technology-saas-014-marketing-analytics.html",
+  "technology-saas-015-email-automation-platform.html",
+  "technology-saas-016-newsletter-platform.html",
+  "technology-saas-017-video-conferencing.html",
+  "technology-saas-018-team-chat-messaging.html",
+  "technology-saas-019-workflow-automation.html",
+  "technology-saas-020-zapier-style-integration.html",
+  "technology-saas-021-password-manager.html",
+  "technology-saas-022-vpn-service.html",
+  "technology-saas-023-cybersecurity-platform.html",
+  "technology-saas-024-api-platform.html",
+  "technology-saas-025-code-editor-ide.html",
+  "technology-saas-026-ci-cd-platform.html",
+  "technology-saas-027-website-builder.html",
+  "technology-saas-028-app-builder.html",
+  "technology-saas-029-form-builder.html",
+  "technology-saas-030-accounting-software.html",
+  "technology-saas-031-invoicing-platform.html",
+  "technology-saas-032-expense-management.html",
+  "technology-saas-033-hr-management-system.html",
+  "technology-saas-034-applicant-tracking.html",
+  "technology-saas-035-employee-engagement.html",
+  "technology-saas-036-shopify-alternative.html",
+  "technology-saas-037-inventory-management.html",
+  "technology-saas-038-design-collaboration-tool.html",
+  "technology-saas-039-prototyping-tool.html",
+  "technology-saas-040-cloud-storage.html",
+  "technology-saas-041-file-sharing-platform.html",
+  "technology-saas-042-app-store-landing.html",
+  "technology-saas-043-play-store-landing.html",
+  "technology-saas-044-universal-app-landing.html",
+  "technology-saas-045-futuretools-style.html",
+  "technology-saas-046-job-listing-platform.html",
+  "technology-saas-047-nft-platform.html",
+  "technology-saas-048-crypto-trading-platform.html",
+  "technology-saas-049-token-launch-page.html",
+  "technology-saas-050-dev-agency-landing.html",
+  "travel-tourism-001-travel-agency.html",
+  "travel-tourism-002-luxury-travel-agency.html",
+  "travel-tourism-003-adventure-travel.html",
+  "travel-tourism-004-corporate-travel.html",
+  "travel-tourism-005-honeymoon-planning.html",
+  "travel-tourism-006-tour-operator.html",
+  "travel-tourism-007-city-tour-company.html",
+  "travel-tourism-008-food-tour-company.html",
+  "travel-tourism-009-wine-tour-operator.html",
+  "travel-tourism-010-adventure-tours.html",
+  "travel-tourism-011-safari-operator.html",
+  "travel-tourism-012-hiking-trekking-tours.html",
+  "travel-tourism-013-scuba-diving-tours.html",
+  "travel-tourism-014-fishing-charter.html",
+  "travel-tourism-015-boat-tours-cruises.html",
+  "travel-tourism-016-boutique-hotel.html",
+  "travel-tourism-017-beach-resort.html",
+  "travel-tourism-018-bed-and-breakfast.html",
+  "travel-tourism-019-vacation-rental.html",
+  "travel-tourism-020-hostel.html",
+  "travel-tourism-021-glamping-site.html",
+  "travel-tourism-022-campground-rv-park.html",
+  "travel-tourism-023-car-rental.html",
+  "travel-tourism-024-airport-transfer.html",
+  "travel-tourism-025-limousine-service.html",
+  "travel-tourism-026-charter-bus-company.html",
+  "travel-tourism-027-bike-rental.html",
+  "travel-tourism-028-boat-yacht-rental.html",
+  "travel-tourism-029-visa-service.html",
+  "travel-tourism-030-travel-insurance.html"
+];
+
+    const FILE_PATTERN = /^(.+?)-(\d{3})-(.+)\.html$/i;
+    const PREVIEW_ROOT_MARGIN = "420px 0px";
+
+    function toPascalCase(value) {
+      return value
+        .split(/[-_]+/)
+        .filter(Boolean)
+        .map(function (word) {
+          return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+        })
+        .join("");
+    }
+
+    function toTitleCase(value) {
+      return value
+        .split(/[-_]+/)
+        .filter(Boolean)
+        .map(function (word) {
+          return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+        })
+        .join(" ");
+    }
+
+    const landingPages = LANDING_FILES.map(function (filename) {
+      const match = filename.match(FILE_PATTERN);
+      if (!match) return null;
+
+      return {
+        filename: filename,
+        categoryKey: match[1],
+        categoryName: toPascalCase(match[1]),
+        title: toTitleCase(match[3])
+      };
+    }).filter(Boolean);
+
+    const categoryGroups = new Map();
+
+    landingPages.forEach(function (page) {
+      if (!categoryGroups.has(page.categoryKey)) {
+        categoryGroups.set(page.categoryKey, {
+          key: page.categoryKey,
+          name: page.categoryName,
+          pages: []
+        });
+      }
+
+      categoryGroups.get(page.categoryKey).pages.push(page);
+    });
+
+    const categories = Array.from(categoryGroups.values()).sort(function (a, b) {
+      return a.name.localeCompare(b.name);
+    });
+
+    categories.forEach(function (category) {
+      category.pages.sort(function (a, b) {
+        return a.filename.localeCompare(b.filename, undefined, { numeric: true });
+      });
+    });
+
+    const categoryList = document.querySelector("#category-list");
+    const galleryPanels = document.querySelector("#gallery-panels");
+    const currentCategoryTitle = document.querySelector("#current-category-title");
+    const currentCategoryCount = document.querySelector("#current-category-count");
+    const renderedPanels = new Map();
+    let activeCategoryKey = "";
+
+    const previewObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+
+        const iframe = entry.target;
+        if (!iframe.dataset.src) {
+          previewObserver.unobserve(iframe);
+          return;
+        }
+
+        iframe.addEventListener("load", function () {
+          iframe.closest(".landing-card").classList.add("is-loaded");
+        }, { once: true });
+
+        iframe.src = iframe.dataset.src;
+        iframe.removeAttribute("data-src");
+        previewObserver.unobserve(iframe);
+      });
+    }, {
+      rootMargin: PREVIEW_ROOT_MARGIN,
+      threshold: 0.01
+    });
+
+    function createOpenIcon() {
+      return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M14 5h5v5M10 14 19 5M19 13v6H5V5h6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>';
+    }
+
+    function createCard(page) {
+      const card = document.createElement("article");
+      const previewPath = "./landings/" + encodeURIComponent(page.filename);
+      card.className = "landing-card";
+
+      const preview = document.createElement("div");
+      preview.className = "preview-shell";
+
+      const iframe = document.createElement("iframe");
+      iframe.dataset.src = previewPath;
+      iframe.title = page.title + " preview";
+      iframe.loading = "lazy";
+      iframe.scrolling = "no";
+      iframe.tabIndex = -1;
+      iframe.setAttribute("aria-hidden", "true");
+      iframe.setAttribute("sandbox", "allow-scripts allow-same-origin");
+
+      const loading = document.createElement("span");
+      loading.className = "preview-status";
+      loading.textContent = "Preview loads near viewport";
+
+      preview.append(iframe, loading);
+
+      const footer = document.createElement("div");
+      footer.className = "card-footer";
+
+      const title = document.createElement("h3");
+      title.className = "card-title";
+      title.textContent = page.title;
+
+      const open = document.createElement("a");
+      open.className = "open-link";
+      open.href = previewPath;
+      open.target = "_blank";
+      open.rel = "noopener";
+      open.setAttribute("aria-label", "Open " + page.title + " in a new tab");
+      open.innerHTML = "Open" + createOpenIcon();
+
+      footer.append(title, open);
+      card.append(preview, footer);
+      return card;
+    }
+
+    function createPanel(category) {
+      const panel = document.createElement("div");
+      panel.className = "gallery-grid";
+      panel.dataset.categoryPanel = category.key;
+      panel.setAttribute("aria-label", category.name + " landing pages");
+
+      const fragment = document.createDocumentFragment();
+      category.pages.forEach(function (page) {
+        fragment.append(createCard(page));
+      });
+      panel.append(fragment);
+      galleryPanels.append(panel);
+      renderedPanels.set(category.key, panel);
+      return panel;
+    }
+
+    function observePendingPreviews(panel) {
+      previewObserver.disconnect();
+      panel.querySelectorAll("iframe[data-src]").forEach(function (iframe) {
+        previewObserver.observe(iframe);
+      });
+    }
+
+    function setActiveButton(categoryKey) {
+      categoryList.querySelectorAll(".category-button").forEach(function (button) {
+        const active = button.dataset.category === categoryKey;
+        button.classList.toggle("is-active", active);
+        button.setAttribute("aria-pressed", String(active));
+      });
+    }
+
+    function activateCategory(categoryKey, updateHistory) {
+      const category = categoryGroups.get(categoryKey);
+      if (!category) return;
+
+      renderedPanels.forEach(function (panel) {
+        panel.hidden = panel.dataset.categoryPanel !== categoryKey;
+      });
+
+      const panel = renderedPanels.get(categoryKey) || createPanel(category);
+      panel.hidden = false;
+      activeCategoryKey = categoryKey;
+      currentCategoryTitle.textContent = category.name;
+      currentCategoryCount.textContent = category.pages.length + " landing pages";
+      setActiveButton(categoryKey);
+      observePendingPreviews(panel);
+
+      if (updateHistory) {
+        try {
+          window.history.replaceState(null, "", "#" + encodeURIComponent(categoryKey));
+        } catch (error) {
+          // A local file URL can restrict history mutation in some browsers.
+        }
+      }
+    }
+
+    categories.forEach(function (category) {
+      const button = document.createElement("button");
+      button.className = "category-button";
+      button.type = "button";
+      button.dataset.category = category.key;
+      button.setAttribute("aria-pressed", "false");
+
+      const label = document.createElement("span");
+      label.textContent = category.name;
+
+      const count = document.createElement("span");
+      count.className = "category-count";
+      count.textContent = String(category.pages.length);
+      count.setAttribute("aria-label", category.pages.length + " pages");
+
+      button.append(label, count);
+      button.addEventListener("click", function () {
+        activateCategory(category.key, true);
+      });
+      categoryList.append(button);
+    });
+
+    categoryList.addEventListener("keydown", function (event) {
+      if (!["ArrowDown", "ArrowUp", "ArrowRight", "ArrowLeft", "Home", "End"].includes(event.key)) return;
+
+      const buttons = Array.from(categoryList.querySelectorAll(".category-button"));
+      const currentIndex = buttons.indexOf(document.activeElement);
+      if (currentIndex < 0) return;
+
+      event.preventDefault();
+      let nextIndex = currentIndex;
+
+      if (event.key === "Home") nextIndex = 0;
+      if (event.key === "End") nextIndex = buttons.length - 1;
+      if (event.key === "ArrowDown" || event.key === "ArrowRight") nextIndex = (currentIndex + 1) % buttons.length;
+      if (event.key === "ArrowUp" || event.key === "ArrowLeft") nextIndex = (currentIndex - 1 + buttons.length) % buttons.length;
+
+      buttons[nextIndex].focus();
+      buttons[nextIndex].click();
+    });
+
+    const requestedCategory = decodeURIComponent(window.location.hash.slice(1));
+    const initialCategory = categoryGroups.has(requestedCategory) ? requestedCategory : categories[0].key;
+
+    document.querySelector("#page-stats").textContent = landingPages.length + " pages across " + categories.length + " categories";
+    document.querySelector("#footer-count").textContent = String(landingPages.length);
+    activateCategory(initialCategory, false);
+  </script>
+</body>
+</html>
+

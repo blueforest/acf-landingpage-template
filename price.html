@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Simple social media pricing plans for individuals, growing creators, and agencies." />
+    <meta name="theme-color" content="#f5f5f4" />
+    <title>Pricing — Wesight</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;800&amp;display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          screens: {
+            sm: "640px",
+            md: "768px",
+            lg: "1024px",
+            xl: "1440px",
+          },
+          extend: {
+            colors: {
+              "brand-red": "#f03748",
+              "link-red": "#df1c13",
+              "yellow-accent": "#ffbe2e",
+              "dark-navy": "#13202f",
+              "body-text": "#191919",
+              "muted-text": "#626262",
+              "warm-stone": "#f5f5f4",
+              surface: "#ffffff",
+              "surface-gray": "#f6f6f6",
+              "surface-warm": "#f7f1e7",
+              "border-gray": "#ebebeb",
+            },
+            fontFamily: {
+              body: ["Roboto", "Arial", "Helvetica", "system-ui", "sans-serif"],
+              heading: ["Roboto", "Arial", "Helvetica", "system-ui", "sans-serif"],
+            },
+            fontSize: {
+              "heading-1": ["40px", { lineHeight: "1.5" }],
+              "heading-1-tablet": ["36px", { lineHeight: "1.5" }],
+              "heading-1-mobile": ["28px", { lineHeight: "1.5" }],
+              "heading-3": ["26px", { lineHeight: "1.5" }],
+              "heading-3-mobile": ["21px", { lineHeight: "1.5" }],
+              "body-lg": ["20px", { lineHeight: "1.6" }],
+              body: ["16px", { lineHeight: "1.6" }],
+              "body-small": ["14px", { lineHeight: "1.6" }],
+              "button-medium": ["16px", { lineHeight: "1.3" }],
+              price: ["48px", { lineHeight: "1.2", letterSpacing: "2px" }],
+              caption: ["12px", { lineHeight: "1.5" }],
+            },
+            spacing: {
+              "design-xs": "4px",
+              "design-s": "8px",
+              "design-m": "16px",
+              "design-l": "24px",
+              "design-xl": "48px",
+              "design-2xl": "80px",
+            },
+            borderRadius: {
+              badge: "4px",
+              card: "5px",
+              panel: "16px",
+              pill: "26px",
+            },
+            maxWidth: {
+              content: "1200px",
+              intro: "720px",
+            },
+            minHeight: {
+              touch: "44px",
+              button: "52px",
+            },
+            ringWidth: {
+              3: "3px",
+            },
+          },
+        },
+      };
+    </script>
+    <style type="text/tailwindcss">
+      @layer base {
+        body {
+          @apply m-0 bg-warm-stone font-body text-body text-body-text antialiased;
+          font-feature-settings: normal;
+          letter-spacing: normal;
+          overflow-wrap: break-word;
+        }
+
+        a { touch-action: manipulation; }
+        :focus-visible { @apply outline-none ring-3 ring-link-red ring-offset-4; }
+      }
+
+      @layer components {
+        .section-container { @apply mx-auto w-full max-w-content px-design-m sm:px-design-l lg:px-8; }
+        .heading-1 { @apply font-heading text-heading-1-mobile font-bold text-dark-navy md:text-heading-1-tablet lg:text-heading-1; }
+        .pricing-card { @apply flex h-full flex-col rounded-panel border border-border-gray bg-surface p-design-l transition-colors duration-200 sm:p-8; }
+        .pricing-card:hover { @apply border-brand-red; }
+        .pricing-card-featured { @apply relative border-t-4 border-t-brand-red; }
+        .plan-icon { @apply flex h-12 w-12 shrink-0 items-center justify-center rounded-card bg-surface-warm text-brand-red; }
+        .plan-title { @apply font-heading text-heading-3-mobile font-bold text-dark-navy lg:text-heading-3; }
+        .plan-price { @apply font-heading text-price font-bold text-dark-navy; }
+        .feature-item { @apply flex items-start gap-3 font-body text-body text-body-text; }
+        .check-icon { @apply mt-1 h-5 w-5 shrink-0 fill-current text-brand-red; }
+        .button-primary { @apply inline-flex min-h-button w-full items-center justify-center rounded-pill border border-brand-red bg-brand-red px-7 py-3 font-heading text-button-medium font-bold text-white no-underline transition-colors duration-200 hover:border-link-red hover:bg-link-red active:border-link-red active:bg-link-red; }
+        .button-secondary { @apply inline-flex min-h-button w-full items-center justify-center rounded-pill border border-brand-red bg-surface px-7 py-3 font-heading text-button-medium font-bold text-brand-red no-underline transition-colors duration-200 hover:bg-brand-red hover:text-white active:border-link-red active:bg-link-red active:text-white; }
+        .trust-item { @apply flex items-center gap-design-s font-body text-body-small text-body-text; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { transition-duration: 0.01ms !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="fixed left-3 top-3 z-50 -translate-y-[160%] rounded-pill bg-dark-navy px-5 py-2.5 text-white focus:translate-y-0" href="#pricing">Skip to pricing</a>
+
+    <main>
+      <section id="pricing" class="bg-warm-stone py-[72px] sm:py-design-2xl lg:py-24" aria-labelledby="pricing-heading">
+        <div class="section-container">
+          <header class="mx-auto mb-design-xl max-w-intro text-center sm:mb-16">
+        
+            <h1 class="heading-1 mb-design-m" id="pricing-heading">选择您的资费</h1>
+            <p class="mx-auto max-w-2xl text-body text-muted-text sm:text-body-lg">具体价格视具体情况而定.</p>
+          </header>
+
+          <div class="grid grid-cols-1 items-stretch gap-design-l md:grid-cols-2 lg:grid-cols-3">
+            <article class="pricing-card" aria-labelledby="starter-title">
+              <div class="mb-design-l flex items-center gap-design-m">
+                <span class="plan-icon" aria-hidden="true">
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                  </svg>
+                </span>
+                <h2 class="plan-title" id="starter-title">落地页</h2>
+              </div>
+
+              <p class="mb-design-l">
+                <span class="plan-price">¥800</span>
+                <span class="text-muted-text">/页</span>
+              </p>
+
+              <p class="mb-8 text-body text-muted-text">用户点击广告、链接、短视频之后,第一个跳进来的页面.集中全部内容，完成单一转化.</p>
+
+              <ul class="mb-8 flex-1 space-y-3" aria-label="Starter plan features">
+                <li class="feature-item"><svg class="check-icon" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>自定义部署</span></li>
+                <li class="feature-item"><svg class="check-icon" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>免费SSL</span></li>
+                <li class="feature-item"><svg class="check-icon" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>免费维护2月</span></li>
+              </ul>
+
+              <a href="#" class="button-secondary">选择</a>
+            </article>
+
+            <article class="pricing-card pricing-card-featured" aria-labelledby="professional-title">
+         
+
+              <div class="mb-design-l flex items-center gap-design-m">
+                <span class="plan-icon" aria-hidden="true">
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                  </svg>
+                </span>
+                <h2 class="plan-title" id="professional-title">Wordpress建站</h2>
+              </div>
+
+              <p class="mb-design-l">
+                <span class="plan-price">¥3800</span>
+          
+              </p>
+
+
+
+              <ul class="mb-8 flex-1 space-y-3" aria-label="Professional plan features">
+                <li class="feature-item"><svg class="check-icon" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>全站框架搭建</span></li>
+                <li class="feature-item"><svg class="check-icon" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>首页视觉设计</span></li>
+                <li class="feature-item"><svg class="check-icon" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>页面搭建14页</span></li>
+
+                <li class="feature-item"><svg class="check-icon" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>免费SSL</span></li>
+                   <li class="feature-item"><svg class="check-icon" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>图片优化</span></li>
+                         <li class="feature-item"><svg class="check-icon" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>移动端适配</span></li>
+
+
+                          <li class="feature-item"><svg class="check-icon" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>可自定义部署</span></li>
+                           <li class="feature-item"><svg class="check-icon" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>默认Hostinger</span></li>
+                                <li class="feature-item"><svg class="check-icon" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>续费300元/年</span></li>
+
+              </ul>
+
+              <a href="#" class="button-primary">选择</a>
+            </article>
+
+
+
+
+            <article class="pricing-card md:col-span-2 lg:col-span-1" aria-labelledby="agency-title">
+              <div class="mb-design-l flex items-center gap-design-m">
+                <span class="plan-icon" aria-hidden="true">
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                  </svg>
+                </span>
+                <h2 class="plan-title" id="agency-title">Google SEO</h2>
+              </div>
+
+              <p class="mb-design-l">
+                <span class="plan-price">$12800</span>
+                <span class="text-muted-text">/年</span>
+              </p>
+
+          
+
+              <ul class="mb-8 flex-1 space-y-3" aria-label="Agency plan features">
+                <li class="feature-item"><svg class="check-icon" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>关键词集群策划</span></li>
+                <li class="feature-item"><svg class="check-icon" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>文章Outline 策划</span></li>
+                <li class="feature-item"><svg class="check-icon" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>优质文章撰写与发布</span></li>
+              </ul>
+
+              <a href="#" class="button-secondary">选择</a>
+            </article>
+          </div>
+
+       
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
