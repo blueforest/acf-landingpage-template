@@ -25,6 +25,7 @@
       --radius-control: 5px;
       --radius-pill: 26px;
       --content-width: 1600px;
+      --header-height: 76px;
     }
 
     * {
@@ -37,6 +38,7 @@
 
     body {
       margin: 0;
+      padding-top: var(--header-height);
       min-width: 0;
       overflow-x: hidden;
       background: var(--surface);
@@ -44,6 +46,10 @@
       font-family: "Roboto", Arial, Helvetica, system-ui, sans-serif;
       font-size: 16px;
       line-height: 1.6;
+    }
+
+    body.menu-open {
+      overflow: hidden;
     }
 
     button,
@@ -75,6 +81,186 @@
 
     .skip-link:focus {
       transform: translateY(0);
+    }
+
+    .site-header {
+      position: fixed;
+      z-index: 100;
+      top: 0;
+      right: 0;
+      left: 0;
+      min-height: var(--header-height);
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .site-header__inner {
+      display: flex;
+    
+      min-height: var(--header-height);
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      margin-inline: auto;
+      padding-inline: 32px;
+    }
+
+    .site-brand {
+      width: 142px;
+      flex: 0 0 auto;
+      padding-block: 8px;
+    }
+
+    .site-brand img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .menu-toggle {
+      display: inline-flex;
+      width: 48px;
+      min-width: 48px;
+      height: 48px;
+      min-height: 48px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-control);
+      background: var(--surface);
+      color: var(--dark-navy);
+      padding: 0;
+    }
+
+    .menu-bar {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: currentColor;
+      transition: transform 200ms ease, opacity 200ms ease;
+    }
+
+    .menu-toggle[aria-expanded="true"] .menu-bar:first-child {
+      transform: translateY(8px) rotate(45deg);
+    }
+
+    .menu-toggle[aria-expanded="true"] .menu-bar:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle[aria-expanded="true"] .menu-bar:last-child {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .primary-nav {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      display: none;
+      width: 100%;
+      max-height: calc(100dvh - var(--header-height));
+      overflow-y: auto;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+      padding: 24px;
+    }
+
+    .primary-nav.is-open {
+      display: block;
+    }
+
+    .primary-nav ul {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .nav-link,
+    .nav-summary {
+      display: inline-flex;
+      width: 100%;
+      min-height: 52px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      border-bottom: 1px solid var(--border);
+      color: var(--dark-navy);
+      font-size: 16px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: color 200ms ease;
+    }
+
+    .nav-summary {
+      cursor: pointer;
+      list-style: none;
+    }
+
+    .nav-summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .nav-summary svg {
+      width: 12px;
+      height: 12px;
+      transition: transform 200ms ease;
+    }
+
+    .nav-services[open] .nav-summary,
+    .nav-link:hover,
+    .nav-summary:hover {
+      color: var(--link-red);
+    }
+
+    .nav-services[open] .nav-summary svg {
+      transform: rotate(180deg);
+    }
+
+    .service-links {
+      border-bottom: 1px solid var(--border);
+      padding: 0 0 8px 20px;
+    }
+
+    .service-links a {
+      display: flex;
+      min-height: 48px;
+      align-items: center;
+      color: var(--dark-navy);
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .service-links a:hover,
+    .service-links a[aria-current="page"] {
+      color: var(--link-red);
+    }
+
+    .header-cta {
+      display: inline-flex;
+      width: 100%;
+      min-height: 44px;
+      align-items: center;
+      justify-content: center;
+      margin-top: 20px;
+      border-radius: var(--radius-pill);
+      background: var(--brand-red);
+      padding: 12px 24px;
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background-color 200ms ease;
+    }
+
+    .header-cta:hover {
+      background: var(--link-red);
     }
 
     .page-header {
@@ -146,8 +332,8 @@
 
     .category-panel {
       position: sticky;
-      top: 24px;
-      max-height: calc(100vh - 48px);
+      top: 104px;
+      max-height: calc(100vh - 128px);
       overflow: hidden;
       border: 1px solid var(--border);
       border-radius: var(--radius-card);
@@ -420,6 +606,10 @@
         padding-inline: 16px;
       }
 
+      .site-header__inner {
+        padding-inline: 16px;
+      }
+
       .page-header__inner {
         padding-block: 40px 36px;
       }
@@ -504,6 +694,93 @@
       }
     }
 
+    @media (min-width: 768px) {
+      .site-brand {
+        width: 154px;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      :root {
+        --header-height: 80px;
+      }
+
+      .site-brand {
+        width: 164px;
+      }
+
+      .menu-toggle {
+        display: none;
+      }
+
+      .primary-nav {
+        position: static;
+        display: flex;
+        width: auto;
+        max-height: none;
+        align-items: center;
+        overflow: visible;
+        border: 0;
+        background: transparent;
+        padding: 0;
+      }
+
+      .primary-nav ul {
+        flex-direction: row;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .nav-link,
+      .nav-summary {
+        width: auto;
+        min-height: 44px;
+        border: 0;
+        font-size: 14px;
+      }
+
+      .nav-services {
+        position: relative;
+      }
+
+      .service-links {
+        position: absolute;
+        top: calc(100% + 10px);
+        left: -20px;
+        display: none;
+        width: 240px;
+        border: 1px solid var(--border);
+        background: var(--surface);
+        padding: 10px 0;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      }
+
+      .nav-services[open] .service-links {
+        display: block;
+      }
+
+      .service-links a {
+        min-height: 0;
+        padding: 10px 20px;
+      }
+
+      .service-links a:hover {
+        background: #f6f6f6;
+      }
+
+      .header-cta {
+        width: auto;
+        margin-top: 0;
+        font-size: 21px;
+      }
+    }
+
+    @media (min-width: 1440px) {
+      .primary-nav ul {
+        gap: 28px;
+      }
+    }
+
     @media (hover: none) {
       .open-link {
         opacity: 1;
@@ -525,19 +802,55 @@
   </style>
 </head>
 <body>
-  <a class="skip-link" href="#gallery-content">Skip to landing page gallery</a>
+
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="site-brand" href="../index.html#top" aria-label="Wesight home">
+        <img src="../logo.svg" alt="Wesight" width="800" height="190">
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation">
+        <span class="menu-bar" aria-hidden="true"></span>
+        <span class="menu-bar" aria-hidden="true"></span>
+        <span class="menu-bar" aria-hidden="true"></span>
+      </button>
+      <nav class="primary-nav" id="primary-navigation" aria-label="Primary navigation">
+        <ul>
+          <li>
+            <details class="nav-services">
+              <summary class="nav-summary">
+                Services
+                <svg viewBox="0 0 12 12" aria-hidden="true">
+                  <path d="M2.25 4.5 6 8.25 9.75 4.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+                </svg>
+              </summary>
+              <div class="service-links">
+                <a href="../webdesign.html#portfolio">Web Design</a>
+                <a href="#gallery-content" aria-current="page">Landing Page Service</a>
+              </div>
+            </details>
+          </li>
+          <li><a class="nav-link" href="../index.html#about">About</a></li>
+          <li><a class="nav-link" href="../index.html#color-scheme">Color Scheme</a></li>
+          <li><a class="nav-link" href="../index.html#website-template">Website Template</a></li>
+          <li><a class="nav-link" href="../index.html#pricing">Pricing</a></li>
+          <li><a class="header-cta" href="../index.html#contact">Contact Us</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
   <header class="page-header">
     <div class="page-header__inner">
-      <p class="eyebrow">Template library</p>
+
       <h1>Landing Page Gallery</h1>
       <p class="page-intro">Browse landing page concepts by business category. Live previews load only when they approach the viewport.</p>
       <p class="page-stats" id="page-stats" aria-live="polite"></p>
     </div>
   </header>
 
-  <main class="workspace-shell" id="gallery-content">
-    <div class="workspace">
+  <main class="workspace-shell" id="main-content">
+    <div class="workspace" id="gallery-content">
       <aside class="category-panel" aria-labelledby="categories-heading">
         <h2 class="category-panel__heading" id="categories-heading">Categories</h2>
         <nav class="category-list" id="category-list" aria-label="Landing page categories"></nav>
@@ -565,6 +878,36 @@
       <p><span id="footer-count"></span> local HTML templates</p>
     </div>
   </footer>
+
+  <script>
+    (function () {
+      const menuToggle = document.querySelector(".menu-toggle");
+      const primaryNav = document.querySelector(".primary-nav");
+
+      function closeMenu() {
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Open navigation");
+        primaryNav.classList.remove("is-open");
+        document.body.classList.remove("menu-open");
+      }
+
+      menuToggle.addEventListener("click", function () {
+        const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+        menuToggle.setAttribute("aria-expanded", String(!isOpen));
+        menuToggle.setAttribute("aria-label", isOpen ? "Open navigation" : "Close navigation");
+        primaryNav.classList.toggle("is-open", !isOpen);
+        document.body.classList.toggle("menu-open", !isOpen);
+      });
+
+      primaryNav.querySelectorAll("a").forEach(function (link) {
+        link.addEventListener("click", closeMenu);
+      });
+
+      window.addEventListener("resize", function () {
+        if (window.innerWidth >= 1024) closeMenu();
+      });
+    }());
+  </script>
 
   <script>
     const LANDING_FILES = [
@@ -1452,4 +1795,3 @@
   </script>
 </body>
 </html>
-
